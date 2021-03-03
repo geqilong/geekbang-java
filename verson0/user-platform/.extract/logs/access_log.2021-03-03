@@ -1,0 +1,3 @@
+0:0:0:0:0:0:0:1 - - [03/Mar/2021:22:27:19 +0800] GET /favicon.ico HTTP/1.1 200 - http-bio-8080-exec-1 69
+0:0:0:0:0:0:0:1 - - [03/Mar/2021:22:27:31 +0800] GET /register?name=geqilong4&password=fdasfdsa&email=geqilong%40kindle.cn&phoneNumber=13685765524 HTTP/1.1 200 883 http-bio-8080-exec-3 3013
+0:0:0:0:0:0:0:1 - - [03/Mar/2021:22:27:32 +0800] GET /favicon.ico HTTP/1.1 200 - http-bio-8080-exec-4 4

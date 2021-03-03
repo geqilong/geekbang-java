@@ -55,11 +55,6 @@ public class DBConnectionManager {
         String jndiName = "java:comp/env/jdbc/derbyJndiSource";
         Connection connection;
         try {
-            /*Properties props = new Properties();
-            props.setProperty("java.naming.factory.initial", "org.jnp.interfaces.NamingContextFactory");
-            //方式1：JNDI服务主机和端口设置
-            props.setProperty("java.naming.provider.url", "localhost:8080");*/
-            // Obtain our environment naming context
             Context context = new InitialContext();
             DataSource dataSource = (DataSource) context.lookup(jndiName);
             connection = dataSource.getConnection();
