@@ -1,43 +1,24 @@
 package org.geektimes.projects.user.sql;
 
+import org.geektimes.projects.user.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
+import org.geektimes.projects.user.web.listener.ComponentContextInitializerListener;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.rmi.NoSuchObjectException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBConnectionManager {
-
-    private Connection connection;
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-    public Connection getConnection() {
-        this.connection = createJNDIConnection();
-        return this.connection;
-    }
-
-    public void releaseConnection() {
-        if (this.connection != null) {
-            try {
-                this.connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e.getCause());
-            }
-        }
-    }
+    private final Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
 
     public Connection createConnection() {
         String databaseURL = "jdbc:derby:/db/user-platform;create=true";
@@ -46,23 +27,26 @@ public class DBConnectionManager {
             connection = DriverManager.getConnection(databaseURL);
             return connection;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.log(Level.SEVERE, "获取JDBC数据库连接异常");
         }
         return null;
     }
 
     public Connection createJNDIConnection() {
-        String jndiName = "java:comp/env/jdbc/derbyJndiSource";
-        Connection connection;
+        Connection connection = null;
         try {
-            Context context = new InitialContext();
-            DataSource dataSource = (DataSource) context.lookup(jndiName);
-            connection = dataSource.getConnection();
-            return connection;
-        } catch (SQLException | NamingException throwables) {
-            throwables.printStackTrace();
+            ComponentContext componentContext = ComponentContext.getInstance();
+            if (null != componentContext) {
+                DataSource dataSource = componentContext.getComponent("jdbc/derbyJndiSource");
+                connection = dataSource.getConnection();
+            }
+        } catch (SQLException | NoSuchObjectException throwables) {
+            logger.log(Level.SEVERE, "获取JNDI数据库连接异常");
         }
-        return null;
+        if (connection != null) {
+            logger.log(Level.INFO, "获取JNDI数据库连接成功");
+        }
+        return connection;
     }
 
     public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";

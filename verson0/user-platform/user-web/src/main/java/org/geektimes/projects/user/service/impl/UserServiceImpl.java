@@ -10,7 +10,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) {
-        UserRepository userRepository = new DatabaseUserRepository(new DBConnectionManager());
+        UserRepository userRepository = new DatabaseUserRepository();
         return userRepository.save(user);
     }
 

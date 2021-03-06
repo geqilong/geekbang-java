@@ -1,6 +1,7 @@
 package org.geektimes.projects.user.repository;
 
 import org.geektimes.function.ThrowableFunction;
+import org.geektimes.projects.user.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -8,6 +9,7 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.rmi.NoSuchObjectException;
 import java.sql.*;
 import java.util.*;
 import java.util.function.Consumer;
@@ -30,14 +32,21 @@ public class DatabaseUserRepository implements UserRepository {
 
     public static final String QUERY_ALL_USERS_DML_SQL = "SELECT id,name,password,email,phoneNumber FROM users";
 
-    private final DBConnectionManager dbConnectionManager;
+    private DBConnectionManager dbConnectionManager;
 
-    public DatabaseUserRepository(DBConnectionManager dbConnectionManager) {
-        this.dbConnectionManager = dbConnectionManager;
+    public DatabaseUserRepository() {
+        try {
+            ComponentContext componentContext = ComponentContext.getInstance();
+            if (null != componentContext) {
+                this.dbConnectionManager = componentContext.getComponent("bean/DBConnectionManager");
+            }
+        } catch (NoSuchObjectException e) {
+            logger.log(Level.SEVERE, "初始化DBConnectionManager异常");
+        }
     }
 
     private Connection getConnection() {
-        return dbConnectionManager.getConnection();
+        return dbConnectionManager.createJNDIConnection();
     }
 
     @Override
