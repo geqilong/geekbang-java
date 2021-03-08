@@ -1,5 +1,12 @@
 package org.geektimes.projects.user.domain;
 
+
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 /**
@@ -7,16 +14,29 @@ import java.util.Objects;
  *
  * @since 1.0
  */
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    @Min(1)
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
+    @Length(min = 6, max = 12)
     private String password;
 
+    @Column
     private String email;
 
+    @Column
+    @Pattern(regexp = "^((\\+?86)|(\\(\\+86\\)))?((((13[^4]{1})|(14[5-9]{1})|147|(15[^4]{1})|166|(17\\d{1})|(18\\d{1})|(19[12589]{1}))\\d{8})|((134[^9]{1}|1410|1440)\\d{7}))$",
+            message = "请输入11位大陆手机号")
     private String phoneNumber;
 
     public Long getId() {

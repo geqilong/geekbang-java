@@ -35,14 +35,11 @@ public class DatabaseUserRepository implements UserRepository {
     private DBConnectionManager dbConnectionManager;
 
     public DatabaseUserRepository() {
-        try {
-            ComponentContext componentContext = ComponentContext.getInstance();
-            if (null != componentContext) {
-                this.dbConnectionManager = componentContext.getComponent("bean/DBConnectionManager");
-            }
-        } catch (NoSuchObjectException e) {
-            logger.log(Level.SEVERE, "初始化DBConnectionManager异常");
+        ComponentContext componentContext = ComponentContext.getInstance();
+        if (null != componentContext) {
+            this.dbConnectionManager = componentContext.getComponent("bean/DBConnectionManager");
         }
+        logger.log(Level.SEVERE, "初始化DBConnectionManager成功");
     }
 
     private Connection getConnection() {

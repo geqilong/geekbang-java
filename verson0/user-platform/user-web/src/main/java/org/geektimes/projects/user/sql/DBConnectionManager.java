@@ -4,6 +4,8 @@ import org.geektimes.projects.user.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.web.listener.ComponentContextInitializerListener;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.beans.BeanInfo;
@@ -19,6 +21,16 @@ import java.util.logging.Logger;
 
 public class DBConnectionManager {
     private final Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
+
+    @Resource(name = "jdbc/derbyJndiSource")
+    private DataSource dataSource;
+    @Resource(name = "bean/EntityManager")
+    private EntityManager entityManager;
+
+    public EntityManager getEntityManager() {
+        logger.info("当前EntityManager实现类:" + entityManager.getClass().getName());
+        return entityManager;
+    }
 
     public Connection createConnection() {
         String databaseURL = "jdbc:derby:/db/user-platform;create=true";
@@ -40,7 +52,7 @@ public class DBConnectionManager {
                 DataSource dataSource = componentContext.getComponent("jdbc/derbyJndiSource");
                 connection = dataSource.getConnection();
             }
-        } catch (SQLException | NoSuchObjectException throwables) {
+        } catch (SQLException throwables) {
             logger.log(Level.SEVERE, "获取JNDI数据库连接异常");
         }
         if (connection != null) {

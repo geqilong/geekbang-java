@@ -1,8 +1,9 @@
 package org.geektimes.projects.user.web.controller;
 
+import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.projects.user.domain.MessageResult;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.service.UserService;
-import org.geektimes.projects.user.service.impl.UserServiceImpl;
 import org.geektimes.web.mvc.controller.PageController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +27,14 @@ public class RegController implements PageController {
         user.setPassword(password);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
-        UserService userService = new UserServiceImpl();
-        boolean success = userService.register(user);
-        return (success ? "success.jsp" : "failure.jsp");
+        UserService userService = ComponentContext.getInstance().getComponent("bean/UserService");
+        MessageResult msgRes = userService.register(user);
+        if (msgRes.getStatus()) {
+            return "success.jsp";
+        } else {
+            request.setAttribute("message", msgRes.getMessage());
+            return "failure.jsp";
+        }
     }
 
 }
