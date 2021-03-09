@@ -4,7 +4,7 @@ import org.geektimes.projects.user.domain.MessageResult;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.LocalTransactional;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * 用户服务
@@ -46,4 +46,6 @@ public interface UserService {
     User queryUserById(Long id);
 
     User queryUserByNameAndPassword(String name, String password);
+
+    List<User> queryAllUsers();
 }

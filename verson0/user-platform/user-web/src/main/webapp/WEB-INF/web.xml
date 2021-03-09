@@ -89,7 +89,7 @@
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
 
-    <resource-ref>
+    <!--<resource-ref>
         <description>Derby JDBC Connection</description>
         <res-ref-name>jdbc/derbyJndiSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -100,5 +100,5 @@
         <description>Object Factory for bean/DBConnectionManager instances</description>
         <resource-env-ref-name>bean/DBConnectionManager</resource-env-ref-name>
         <resource-env-ref-type>org.geektimes.projects.user.sql.DBConnectionManager</resource-env-ref-type>
-    </resource-env-ref>
+    </resource-env-ref>-->
 </web-app>

@@ -1,3 +1,4 @@
 org.geektimes.projects.user.web.controller.HelloWorldController
 org.geektimes.projects.user.web.controller.SignUpController
 org.geektimes.projects.user.web.controller.RegController
+org.geektimes.projects.user.web.controller.UserController

@@ -4,8 +4,6 @@ package org.geektimes.projects.user.domain;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
@@ -20,8 +18,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    @Min(1)
     private Long id;
 
     @Column

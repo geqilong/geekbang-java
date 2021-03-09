@@ -7,10 +7,12 @@ import org.geektimes.projects.user.sql.LocalTransactional;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -39,20 +41,21 @@ public class UserServiceImpl implements UserService {
         violations.forEach(new Consumer<ConstraintViolation<User>>() {
             @Override
             public void accept(ConstraintViolation<User> cv) {
-                sb.append(cv.getPropertyPath() + "" + cv.getMessage()+";");
+                sb.append(cv.getPropertyPath() + "" + cv.getMessage() + ";");
             }
         });
         return sb.substring(0, sb.length() - 1);
     }
 
     //默认需要事务
-    @LocalTransactional
     @Override
     public boolean save(User user) {
         // before process
-//        EntityTransaction transaction = entityManager.getTransaction();
-//        transaction.begin();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(user);
+        entityManager.flush();
+        transaction.commit();
         // 调用其他方法方法
         //update(user); // 涉及事务
         // register 方法和 update 方法存在于同一线程
@@ -101,5 +104,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryUserByNameAndPassword(String name, String password) {
         return null;
+    }
+
+    @Override
+    public List<User> queryAllUsers() {
+        List<User> userList;
+        Query query = entityManager.createNativeQuery("select * from users");
+        List list = query.getResultList();
+        userList = new ArrayList<>(list.size());
+        list.forEach(new Consumer() {
+            @Override
+            public void accept(Object obj) {
+                Object[] objects = (Object[]) obj;
+                User user = new User();
+                user.setId(Long.valueOf((null != objects[0] ? objects[0].toString() : null)));
+                user.setName((null != objects[1] ? objects[1].toString() : null));
+                user.setPassword((null != objects[2] ? objects[2].toString() : null));
+                user.setEmail((null != objects[3] ? objects[3].toString() : null));
+                user.setPhoneNumber((null != objects[4] ? objects[4].toString() : null));
+                userList.add(user);
+            }
+        });
+        return userList;
     }
 }
