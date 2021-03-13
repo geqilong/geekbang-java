@@ -48,6 +48,8 @@ public class FrontControllerServlet extends HttpServlet {
      * 利用 ServiceLoader 技术（Java SPI）
      */
     private void initHandleMethods() {
+        //ServiceLoader 技术
+        // File: verson0/user-platform/user-web/src/main/resources/META-INF/services/org.geektimes.web.mvc.controller.Controller
         for (Controller controller : ServiceLoader.load(Controller.class)) {
             Class<?> controllerClass = controller.getClass();
             Path pathFromClass = controllerClass.getAnnotation(Path.class);

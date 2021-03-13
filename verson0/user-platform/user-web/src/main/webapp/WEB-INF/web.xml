@@ -4,9 +4,17 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          metadata-complete="true" version="2.5">
+    <!--ServletContextÅäÖÃ²ÎÊý-->
+    <context-param>
+        <param-name>application.name</param-name>
+        <param-value>user-webbbbb</param-value>
+    </context-param>
 
     <listener>
         <listener-class>org.geektimes.projects.user.web.listener.ComponentContextInitializerListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.geektimes.projects.user.web.listener.TestingListener</listener-class>
     </listener>
 
     <servlet>

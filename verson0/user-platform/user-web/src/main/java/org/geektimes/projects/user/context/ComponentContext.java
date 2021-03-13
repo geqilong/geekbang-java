@@ -167,7 +167,7 @@ public class ComponentContext {
         });
     }
 
-    private <C> C lookupComponent(String name) {
+    protected <C> C lookupComponent(String name) {
         return executeInContext(context -> (C) context.lookup(name));
     }
 
@@ -193,7 +193,8 @@ public class ComponentContext {
                     fullNames.addAll(listComponentNames(element.getName()));
                 } else {
                     // 否则，当前名称绑定目标类型的话，添加该名称到集合中
-                    String fullName = (name.startsWith("/") ? element.getName() : name) + "/" + element.getName();//获取相对路径
+                    String fullName = name.startsWith("/") ? element.getName() :
+                                    name + "/" + element.getName();//获取相对路径
                     fullNames.add(fullName);
                 }
             }
@@ -210,7 +211,7 @@ public class ComponentContext {
      * @see ThrowableFunction#apply(Object)
      */
     protected <R> R executeInContext(ThrowableFunction<Context, R> function) {
-        return executeInContext(this.context, function, false);
+        return executeInContext(this.context, function, true);
     }
 
     /**
@@ -228,7 +229,7 @@ public class ComponentContext {
             result = ThrowableFunction.execute(context, function);
         } catch (Exception e) {
             if (ignoredException) {
-                logger.warning(e.getMessage());
+                logger.warning("Error in ComponentContext#executeInContext->executing function: " + function+ e.getMessage());
             } else {
                 throw new RuntimeException(e);
             }
