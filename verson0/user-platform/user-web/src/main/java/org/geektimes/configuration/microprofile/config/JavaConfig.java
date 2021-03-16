@@ -4,6 +4,7 @@ import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigValue;
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.eclipse.microprofile.config.spi.Converter;
+import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -14,6 +15,7 @@ public class JavaConfig implements Config {
      * 内部可变的集合，不要直接暴露在外面
      */
     private List<ConfigSource> configSources = new LinkedList<>();
+    private Map<String, Converter> converterMap = new HashMap<>();
 
     public JavaConfig() {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -30,13 +32,27 @@ public class JavaConfig implements Config {
                 return Integer.compare(o2.getOrdinal(), o1.getOrdinal());
             }
         });
+
+        ServiceLoader<MyConverter> converterServiceLoader = ServiceLoader.load(MyConverter.class, classLoader);
+        converterServiceLoader.forEach(new Consumer<MyConverter>() {
+            @Override
+            public void accept(MyConverter myConverter) {
+                converterMap.put(myConverter.getSourceType(), myConverter);
+            }
+        });
     }
 
     @Override
     public <T> T getValue(String propertyName, Class<T> aClass) {
         String propertyValue = getPropertyValue(propertyName);
         //转换为目标类型
-        return null;
+        String clazzType = aClass.getSimpleName();
+        if ("String".equals(clazzType)) {
+            return (T) propertyValue;
+        } else {
+            Converter myConverter = converterMap.get(clazzType);
+            return (T) myConverter.convert(propertyValue);
+        }
     }
 
     private String getPropertyValue(String propertyName) {

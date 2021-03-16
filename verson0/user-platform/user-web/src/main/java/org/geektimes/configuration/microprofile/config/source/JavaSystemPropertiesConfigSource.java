@@ -14,8 +14,9 @@ public class JavaSystemPropertiesConfigSource implements ConfigSource {
 
     public JavaSystemPropertiesConfigSource() {
         this.properties = new HashMap<>();
-        for (String propertyName : System.getProperties().stringPropertyNames()) {
-            this.properties.put(propertyName, System.getProperties().getProperty(propertyName));
+        Properties javaSysProperties=  System.getProperties();
+        for (String propertyName : javaSysProperties.stringPropertyNames()) {
+            this.properties.put(propertyName, javaSysProperties.getProperty(propertyName));
         }
     }
 
