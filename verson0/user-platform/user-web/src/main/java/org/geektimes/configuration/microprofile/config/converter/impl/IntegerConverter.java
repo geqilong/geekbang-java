@@ -2,10 +2,10 @@ package org.geektimes.configuration.microprofile.config.converter.impl;
 
 import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
-public class IntegerConverter implements MyConverter {
+public class IntegerConverter implements MyConverter<Integer> {
 
     @Override
-    public Object convert(String s) throws IllegalArgumentException, NullPointerException {
+    public Integer convert(String s) throws IllegalArgumentException, NullPointerException {
         return Integer.getInteger(s);
     }
 

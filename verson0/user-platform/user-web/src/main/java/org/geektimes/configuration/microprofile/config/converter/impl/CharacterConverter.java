@@ -3,9 +3,9 @@ package org.geektimes.configuration.microprofile.config.converter.impl;
 import org.apache.commons.lang.StringUtils;
 import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
-public class CharacterConverter implements MyConverter {
+public class CharacterConverter implements MyConverter<Character> {
     @Override
-    public Object convert(String s) throws IllegalArgumentException, NullPointerException {
+    public Character convert(String s) throws IllegalArgumentException, NullPointerException {
         if (StringUtils.isEmpty(s)) {
             throw new IllegalArgumentException("Empty String");
         }

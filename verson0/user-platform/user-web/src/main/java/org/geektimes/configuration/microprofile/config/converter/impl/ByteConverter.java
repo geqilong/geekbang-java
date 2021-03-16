@@ -2,9 +2,9 @@ package org.geektimes.configuration.microprofile.config.converter.impl;
 
 import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
-public class ByteConverter implements MyConverter {
+public class ByteConverter implements MyConverter<Byte> {
     @Override
-    public Object convert(String s) throws IllegalArgumentException, NullPointerException {
+    public Byte convert(String s) throws IllegalArgumentException, NullPointerException {
         return Byte.valueOf(s);
     }
 

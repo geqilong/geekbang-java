@@ -2,9 +2,9 @@ package org.geektimes.configuration.microprofile.config.converter.impl;
 
 import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
-public class ShortConverter implements MyConverter {
+public class ShortConverter implements MyConverter<Short> {
     @Override
-    public Object convert(String s) throws IllegalArgumentException, NullPointerException {
+    public Short convert(String s) throws IllegalArgumentException, NullPointerException {
         return Short.valueOf(s);
     }
 

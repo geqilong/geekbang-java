@@ -2,9 +2,9 @@ package org.geektimes.configuration.microprofile.config.converter.impl;
 
 import org.geektimes.configuration.microprofile.config.converter.MyConverter;
 
-public class DoubleConverter implements MyConverter {
+public class DoubleConverter implements MyConverter<Double> {
     @Override
-    public Object convert(String s) throws IllegalArgumentException, NullPointerException {
+    public Double convert(String s) throws IllegalArgumentException, NullPointerException {
         return Double.valueOf(s);
     }
 

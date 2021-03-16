@@ -47,12 +47,11 @@ public class JavaConfig implements Config {
         String propertyValue = getPropertyValue(propertyName);
         //转换为目标类型
         String clazzType = aClass.getSimpleName();
-        if ("String".equals(clazzType)) {
-            return (T) propertyValue;
-        } else {
-            Converter myConverter = converterMap.get(clazzType);
-            return (T) myConverter.convert(propertyValue);
+        if ("String".equals(clazzType)){
+            return aClass.cast(propertyValue);
         }
+        Converter<T> myConverter = converterMap.get(clazzType);
+        return myConverter.convert(propertyValue);
     }
 
     private String getPropertyValue(String propertyName) {
