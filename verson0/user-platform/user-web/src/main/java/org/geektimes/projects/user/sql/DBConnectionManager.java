@@ -1,18 +1,15 @@
 package org.geektimes.projects.user.sql;
 
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.projects.context.ComponentContext;
 import org.geektimes.projects.user.domain.User;
-import org.geektimes.projects.user.web.listener.ComponentContextInitializerListener;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.rmi.NoSuchObjectException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;

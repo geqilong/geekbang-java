@@ -1,6 +1,6 @@
 package org.geektimes.projects.user.web.controller;
 
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.projects.context.ComponentContext;
 import org.geektimes.projects.user.domain.MessageResult;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.service.UserService;

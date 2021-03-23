@@ -1,7 +1,7 @@
 package org.geektimes.projects.user.repository;
 
-import org.geektimes.function.ThrowableFunction;
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.projects.context.ComponentContext;
+import org.geektimes.projects.function.ThrowableFunction;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.DBConnectionManager;
 
@@ -9,8 +9,9 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.rmi.NoSuchObjectException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;

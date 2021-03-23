@@ -13,7 +13,7 @@ v0.9- v0.10 2021年3月16日23:25:46
 		扩展 org.eclipse.microprofile.config.spi.ConfigSource实现，包括 OS 环境变量，以及本地配置文件
 		扩展 org.eclipse.microprofile.config.spi.Converter实现，提供 String 类型到简单类型
 		通过 org.eclipse.microprofile.config.Config 读取当前应用名称 property name = "application.name"
-  答：新增OS 环境变量，以及本地配置文件ConfigSource实现:org.geektimes.configuration.microprofile.config.source.OSPropertiesConfigSource,
+  答：新增OS 环境变量，以及本地配置文件ConfigSource实现:org.geektimes.configuration.microprofile.org.geektimes.configuration.microprofile.config.source.impl.OSPropertiesConfigSource,
       org.geektimes.configuration.microprofile.config.source.ConfigFilesConfigSource,并在配置文件org.eclipse.microprofile.config.spi.ConfigSource
       中新增对应实现配置
       新增MyConverter接口，增加org.geektimes.configuration.microprofile.config.converter.impl.BooleanConverter等8中基本类型Converter,

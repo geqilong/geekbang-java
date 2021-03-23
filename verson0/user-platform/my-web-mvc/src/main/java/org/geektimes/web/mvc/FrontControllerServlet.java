@@ -1,6 +1,9 @@
 package org.geektimes.web.mvc;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
+import org.geektimes.configuration.microprofile.config.servlet.ServletContextConfigInitializer;
 import org.geektimes.web.mvc.controller.Controller;
 import org.geektimes.web.mvc.controller.PageController;
 import org.geektimes.web.mvc.controller.RestController;
@@ -18,12 +21,14 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang.StringUtils.substringAfter;
 
 public class FrontControllerServlet extends HttpServlet {
-
+    Logger logger = Logger.getLogger(getClass().getName());
     /**
      * 请求路径和 Controller 的映射关系缓存
      */
@@ -40,14 +45,24 @@ public class FrontControllerServlet extends HttpServlet {
      * @param servletConfig
      */
     public void init(ServletConfig servletConfig) {
-        initHandleMethods();
+        ServletContext servletContext = servletConfig.getServletContext();
+        initHandleMethods(servletContext);
     }
 
     /**
      * 读取所有的 RestController 的注解元信息 @Path
      * 利用 ServiceLoader 技术（Java SPI）
      */
-    private void initHandleMethods() {
+    private void initHandleMethods(ServletContext servletContext) {
+        ConfigProviderResolver configProviderResolver = ConfigProviderResolver.instance();
+        Config config = configProviderResolver.getConfig(servletContext.getClassLoader());
+        Config contextConfig = (Config) servletContext.getAttribute("USER_PLATFORM_CONFIG");
+        Config threadLocalConfig = ServletContextConfigInitializer.getConfig();
+        String propertyName = "application.name";
+        logger.log(Level.INFO, "Getting Config from ConfigProviderResolver:" + config);
+        logger.log(Level.INFO, "1.Same Config? " + (config == contextConfig));
+        logger.log(Level.INFO, "2.Same Config? " + (config == threadLocalConfig));
+        logger.info("^^^^^^FrontControllerServlet.initHandleMethods Property[" + propertyName + "]: " + config.getValue(propertyName, String.class));
         //ServiceLoader 技术
         // File: verson0/user-platform/user-web/src/main/resources/META-INF/services/org.geektimes.web.mvc.controller.Controller
         for (Controller controller : ServiceLoader.load(Controller.class)) {

@@ -1,7 +1,7 @@
 package org.geektimes.projects.user.orm.jpa;
 
 import org.apache.commons.lang.StringUtils;
-import org.geektimes.projects.user.context.ComponentContext;
+import org.geektimes.projects.context.ComponentContext;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -12,7 +12,9 @@ import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.metamodel.Metamodel;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.function.Consumer;
 
 /**

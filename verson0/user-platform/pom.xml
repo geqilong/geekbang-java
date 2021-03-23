@@ -8,11 +8,13 @@
     <artifactId>user-platform</artifactId>
     <name>User Platform ${revision}</name>
     <version>${revision}</version>
-    <packaging>pom</packaging>
+    <packaging>pom</packaging> <!--项目聚合-->
 
     <modules>
         <module>my-web-mvc</module>
         <module>user-web</module>
+        <module>my-configuration</module>
+        <module>my-dependency-injection</module>
     </modules>
 
     <properties>
@@ -48,6 +50,7 @@
 
         <jolokia-client.version>1.6.2</jolokia-client.version>
         <jolokia.version>1.6.2</jolokia.version>
+        <junit.version>4.13</junit.version>
     </properties>
 
     <!-- Artifacts 依赖版本管理 -->
@@ -154,6 +157,12 @@
                 <version>${jolokia.version}</version>
                 <classifier>agent</classifier>
             </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -219,6 +228,11 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.4.9</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -264,6 +278,26 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <configuration>
+                    <container>
+                        <containerId>Tomcat 7.x</containerId>
+                        <type>remote</type>
+                    </container>
+                    <configuration>
+                        <type>runtime</type>
+                        <properties>
+                            <cargo.remote.uri>http://localhost:8080/manager/html</cargo.remote.uri>
+                            <cargo.remote.username>tomcat</cargo.remote.username>
+                            <cargo.remote.password>tomcat</cargo.remote.password>
+                        </properties>
+                    </configuration>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
