@@ -1,6 +1,16 @@
 # geekbang-java
-v0.0 - v0.8 ......
-
+v0.12 - v0.13 周作业
+  作业1 修复本程序 org.geektimes.reactive.streams 包下
+  作业2 继续完善 my-rest-client POST 方法
+  
+v0.11
+  作业1 完善 my dependency-injection 模块
+        脱离 web.xml 配置实现 ComponentContext 自动初始化
+        使用独立模块并且能够在 user-web 中运行成功
+  作业2 完善 my-configuration 模块
+        Config 对象如何能被 my-web-mvc 使用
+        可能在 ServletContext 获取如何通过 ThreadLocal 获取
+  
 v0.9- v0.10 2021年3月16日23:25:46
   
   作业1 整合 https://jolokia.org/
@@ -21,4 +31,5 @@ v0.9- v0.10 2021年3月16日23:25:46
       中新增类型和Converter关联，在JavaConfig#getValue中实现目标类型转换
   
   
-  
+  v0.0 - v0.8 ......
+
