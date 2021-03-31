@@ -6,7 +6,6 @@ import org.geektimes.projects.context.ComponentContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ComponentContextInitializer implements ServletContextListener {
@@ -17,9 +16,6 @@ public class ComponentContextInitializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         this.servletContext = servletContextEvent.getServletContext();
-        ClassicComponentContext componentContext = new ClassicComponentContext();
-        componentContext.init(this.servletContext);
-        logger.log(Level.INFO,"###########################ComponentContext初始化完成###########################");
     }
 
     @Override

@@ -14,6 +14,7 @@ public class TestingInitializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        ClassicComponentContext context = ClassicComponentContext.getInstance();
         testPropertyFromServletContext(servletContextEvent.getServletContext());
         testPropertyFromJNDI();
         testMicroProfile(servletContextEvent.getServletContext().getClassLoader());
