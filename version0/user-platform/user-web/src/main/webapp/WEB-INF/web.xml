@@ -80,6 +80,20 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
+    <filter>
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SetCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
     <jsp-config>
         <jsp-property-group>
@@ -117,4 +131,27 @@
         <resource-env-ref-name>bean/DBConnectionManager</resource-env-ref-name>
         <resource-env-ref-type>org.geektimes.projects.user.sql.DBConnectionManager</resource-env-ref-type>
     </resource-env-ref>-->
+
+    <!-- Define a Security Constraint on this Application -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Hello,World</web-resource-name>
+            <url-pattern>/hello/world</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <!-- NOTE:  This role is not present in the default users file -->
+            <role-name>tomcat</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Define the Login Configuration for this Application -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>Tomcat Host Manager Application</realm-name>
+    </login-config>
+
+    <!-- Security roles referenced by this web application -->
+    <security-role>
+        <role-name>tomcat</role-name>
+    </security-role>
 </web-app>
