@@ -1,4 +1,12 @@
 # geekbang-java
+v0.14 - v0.15 周作业
+  my-cache 模块
+  1.提供一套抽象 API 实现对象的序列化和反序列化
+    使用fastjson、jackson、objectstream实现，包org/geektimes/cache/serialization下；
+  2.通过 Lettuce 实现一套 Redis CacheManager 以及 Cache
+    包org/geektimes/cache/lettuce下实现
+  
+
 v0.12 - v0.13 周作业
   作业1 修复本程序 org.geektimes.reactive.streams 包下
   作业2 继续完善 my-rest-client POST 方法
