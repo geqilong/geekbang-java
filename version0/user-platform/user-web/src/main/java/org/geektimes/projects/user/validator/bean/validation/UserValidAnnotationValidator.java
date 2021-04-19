@@ -4,7 +4,6 @@ import org.geektimes.projects.user.domain.User;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Annotation;
 
 public class UserValidAnnotationValidator implements ConstraintValidator<UserValid, User> {
     private int idRange;
