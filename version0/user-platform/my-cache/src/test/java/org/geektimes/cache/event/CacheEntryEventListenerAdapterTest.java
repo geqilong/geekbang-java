@@ -3,8 +3,6 @@ package org.geektimes.cache.event;
 import org.junit.Test;
 
 import javax.cache.Cache;
-import javax.cache.configuration.CacheEntryListenerConfiguration;
-import javax.cache.configuration.MutableCacheEntryListenerConfiguration;
 import javax.cache.event.EventType;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -15,8 +13,7 @@ public class CacheEntryEventListenerAdapterTest {
     @Test
     public void testOnEvent() {
         TestCacheEntryListener listener = new TestCacheEntryListener();
-        CacheEntryListenerConfiguration configuration = new MutableCacheEntryListenerConfiguration(listener, null, true, false);
-        CacheEntryEventListenerAdapter listenerAdapter = new CacheEntryEventListenerAdapter(configuration);
+        CacheEntryEventListenerAdapter listenerAdapter = new CacheEntryEventListenerAdapter(listener);
         Cache cache = newCacheProxy();
         listenerAdapter.onEvent(new GenericCacheEntryEvent(cache, EventType.CREATED, "a", null, 1));
         listenerAdapter.onEvent(new GenericCacheEntryEvent(cache, EventType.UPDATED, "a", 1, 2));

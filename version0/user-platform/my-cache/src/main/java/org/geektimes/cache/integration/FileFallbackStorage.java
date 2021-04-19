@@ -74,4 +74,18 @@ public class FileFallbackStorage extends AbstractFallbackStorage {
     File toStorage(Object key) {
         return new File(CACHE_FALLBACK_DIRECTORY, key.toString() + ".dat");
     }
+
+    @Override
+    public void destroy() {
+        destroyFallbackDirs();
+    }
+
+    private void destroyFallbackDirs() {
+     if (CACHE_FALLBACK_DIRECTORY.exists()){
+         // Delete all files into directory
+         for (File storageFile : CACHE_FALLBACK_DIRECTORY.listFiles()) {
+             storageFile.delete();
+         }
+     }
+    }
 }

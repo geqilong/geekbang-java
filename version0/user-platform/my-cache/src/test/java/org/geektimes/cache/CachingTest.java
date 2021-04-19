@@ -20,6 +20,9 @@ import static org.geektimes.cache.configuration.ConfigurationUtils.cacheEntryLis
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+/**
+ * {@link Caching} Test
+ */
 public class CachingTest {
 
     @Test
@@ -27,7 +30,9 @@ public class CachingTest {
         CachingProvider cachingProvider = Caching.getCachingProvider();
         CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("in-memory://localhost"), null);
         //Configure the cache
-        MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>().setTypes(String.class, Integer.class);
+        MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>().
+                setManagementEnabled(true).
+                setTypes(String.class, Integer.class);
         //Create the cache
         Cache<String, Integer> cache = cacheManager.createCache("mycache", config);
         //add listener
@@ -51,7 +56,7 @@ public class CachingTest {
     @Test
     public void testSampleRedis() {
         CachingProvider cachingProvider = Caching.getCachingProvider();
-        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://localhost:6379/2"), null);
+        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://localhost:6379/0"), null);
         //Configure the cache
         MutableConfiguration<String, Integer> config = new MutableConfiguration<String, Integer>().setTypes(String.class, Integer.class);
         //Create the cache

@@ -3,6 +3,7 @@ package org.geektimes.cache;
 import javax.cache.Cache;
 import java.util.Map;
 
+@Deprecated
 public class EntryAdapter<K, V> implements Cache.Entry<K, V> {
     private final K key;
     private final V value;

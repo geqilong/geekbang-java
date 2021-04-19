@@ -1,9 +1,6 @@
 package org.geektimes.cache.configuration;
 
-import javax.cache.configuration.CacheEntryListenerConfiguration;
-import javax.cache.configuration.CompleteConfiguration;
-import javax.cache.configuration.Configuration;
-import javax.cache.configuration.MutableCacheEntryListenerConfiguration;
+import javax.cache.configuration.*;
 import javax.cache.event.CacheEntryEventFilter;
 import javax.cache.event.CacheEntryListener;
 
@@ -12,8 +9,18 @@ import javax.cache.event.CacheEntryListener;
  */
 public abstract class ConfigurationUtils {
 
-    public static <K, V> CompleteConfiguration<K, V> completeConfiguration(Configuration<K, V> configuration) {
-        return new ImmutableCompleteConfiguration(configuration);
+    public static <K, V> MutableConfiguration<K, V> mutableConfiguration(Configuration<K, V> configuration) {
+        MutableConfiguration mutableConfiguration = null;
+        if (configuration instanceof MutableConfiguration) {
+            mutableConfiguration = (MutableConfiguration) configuration;
+        } else if (configuration instanceof CompleteConfiguration) {
+            mutableConfiguration = (MutableConfiguration) configuration;
+        } else {
+            mutableConfiguration = new MutableConfiguration<K, V>()
+                    .setTypes(configuration.getKeyType(), configuration.getValueType())
+                    .setStoreByValue(configuration.isStoreByValue());
+        }
+        return mutableConfiguration;
     }
 
     public static <K, V> CacheEntryListenerConfiguration<K, V> cacheEntryListenerConfiguration(CacheEntryListener<? super K, ? super V> listener) {
@@ -36,6 +43,10 @@ public abstract class ConfigurationUtils {
                                                                                                boolean isOldValueRequired,
                                                                                                boolean isSynchronous) {
         return new MutableCacheEntryListenerConfiguration<>(() -> listener, () -> filter, isOldValueRequired, isSynchronous);
+    }
+
+    public static <V, K> CompleteConfiguration<K, V> immutableConfiguration(Configuration<K, V> configuration) {
+        return new ImmutableCompleteConfiguration(configuration);
     }
 
 }
