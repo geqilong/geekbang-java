@@ -1,4 +1,10 @@
 # geekbang-java
+v0.17 第7周作业
+  1.使用 Spring Boot 来实现一个整合 Gitee 或者 Github OAuth2 认证 Servlet
+    在user-web中实现Gitee OAuth2认证，获取用户信息：
+      a.org.geektimes.projects.user.web.controller.HomeController中处理首页登录;
+      b.org.geektimes.projects.user.web.controller.HelloWorldController中执行Gitee OAuth2认证并获取用户信息
+  
 v0.14 - v0.15 周作业
   my-cache 模块
   1.提供一套抽象 API 实现对象的序列化和反序列化
