@@ -39,6 +39,11 @@
         <url-pattern>*.js</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>FrontControllerServlet</servlet-name>
         <servlet-class>org.geektimes.web.mvc.FrontControllerServlet</servlet-class>
@@ -132,26 +137,26 @@
         <resource-env-ref-type>org.geektimes.projects.user.sql.DBConnectionManager</resource-env-ref-type>
     </resource-env-ref>-->
 
-    <!-- Define a Security Constraint on this Application -->
+    <!--&lt;!&ndash; Define a Security Constraint on this Application &ndash;&gt;
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Hello,World</web-resource-name>
             <url-pattern>/hello/world</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <!-- NOTE:  This role is not present in the default users file -->
+            &lt;!&ndash; NOTE:  This role is not present in the default users file &ndash;&gt;
             <role-name>tomcat</role-name>
         </auth-constraint>
     </security-constraint>
 
-    <!-- Define the Login Configuration for this Application -->
+    &lt;!&ndash; Define the Login Configuration for this Application &ndash;&gt;
     <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Tomcat Host Manager Application</realm-name>
     </login-config>
 
-    <!-- Security roles referenced by this web application -->
+    &lt;!&ndash; Security roles referenced by this web application &ndash;&gt;
     <security-role>
         <role-name>tomcat</role-name>
-    </security-role>
+    </security-role>-->
 </web-app>

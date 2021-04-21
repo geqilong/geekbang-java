@@ -1,9 +1,11 @@
 package org.geektimes.projects.user.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.geektimes.projects.user.domain.MessageResult;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.service.UserService;
-import org.geektimes.projects.user.sql.LocalTransactional;
+import org.geektimes.projects.user.utils.UserHttpUtils;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -11,9 +13,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class UserServiceImpl implements UserService {
@@ -91,7 +91,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @LocalTransactional
     public boolean update(User user) {
         return false;
     }
@@ -126,5 +125,25 @@ public class UserServiceImpl implements UserService {
             }
         });
         return userList;
+    }
+
+    @Override
+    public Map queryGiteeUserInfo(String code, String clientId, String clientSecret, String redirectUrl) {
+        String url = "https://gitee.com/oauth/token";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("grant_type", "authorization_code");
+        paramMap.put("code", code);
+        paramMap.put("client_id", clientId);
+        paramMap.put("redirect_uri", redirectUrl);
+        paramMap.put("client_secret", clientSecret);
+        String result = UserHttpUtils.sendHttpPostRequest(url, paramMap);
+        JSONObject jsonObject = JSON.parseObject(result);
+
+        String accessToken = jsonObject.getString("access_token");
+        url = "https://gitee.com/api/v5/user?access_token="+accessToken;
+        result = UserHttpUtils.sendHttpGetRequest(url);
+        jsonObject = JSON.parseObject(result);
+        Map resMap = jsonObject.toJavaObject(Map.class);
+        return resMap;
     }
 }

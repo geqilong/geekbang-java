@@ -2,9 +2,9 @@ package org.geektimes.projects.user.service;
 
 import org.geektimes.projects.user.domain.MessageResult;
 import org.geektimes.projects.user.domain.User;
-import org.geektimes.projects.user.sql.LocalTransactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户服务
@@ -13,6 +13,7 @@ public interface UserService {
 
     /**
      * 注册用户
+     *
      * @param user
      * @return
      */
@@ -24,7 +25,6 @@ public interface UserService {
      * @param user 用户对象
      * @return 成功返回<code>true</code>
      */
-    @LocalTransactional
     boolean save(User user);
 
     /**
@@ -48,4 +48,7 @@ public interface UserService {
     User queryUserByNameAndPassword(String name, String password);
 
     List<User> queryAllUsers();
+
+    Map queryGiteeUserInfo(String code, String clientId, String clientSecre, String redirectUrl);
+
 }

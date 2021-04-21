@@ -98,7 +98,10 @@
             <artifactId>jolokia-jvm</artifactId>
             <classifier>agent</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
         <!-- ActiveMQ -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
