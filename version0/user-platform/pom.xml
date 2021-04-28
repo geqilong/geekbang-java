@@ -70,6 +70,8 @@
         <protobuf.version>3.15.8</protobuf.version>
         <fastjson.version>1.2.70</fastjson.version>
 
+        <!-- Spring 依赖版本 -->
+        <spring-boot.version>2.4.5</spring-boot.version>
         <junit.version>4.13</junit.version>
     </properties>
 
@@ -77,6 +79,14 @@
     <dependencyManagement>
 
         <dependencies>
+            <!-- Spring Boot 2.4.5 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- Servlet 3.1 API -->
             <dependency>
                 <groupId>javax.servlet</groupId>

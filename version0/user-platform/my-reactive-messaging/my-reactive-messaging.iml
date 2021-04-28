@@ -13,7 +13,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.reactive.messaging:microprofile-reactive-messaging-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.reactive-streams-operators:microprofile-reactive-streams-operators-api:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.osgi:org.osgi.annotation.versioning:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
