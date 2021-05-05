@@ -5,12 +5,18 @@ import org.eclipse.microprofile.config.spi.Converter;
 public abstract class AbstractConverter<T> implements Converter<T> {
 
     @Override
-    public T convert(String value) throws IllegalArgumentException, NullPointerException {
-        if (null == value){
-            throw new NullPointerException("The Value Must Not Be Null");
+    public T convert(String value) {
+        if (value == null) {
+            throw new NullPointerException("The value must not be null!");
         }
-        return doConvert(value);
+        T convertedValue = null;
+        try {
+            convertedValue = doConvert(value);
+        } catch (Throwable e) {
+            throw new IllegalArgumentException("The value can't be converted.", e);
+        }
+        return convertedValue;
     }
 
-    protected abstract T doConvert(String value);
+    protected abstract T doConvert(String value) throws Throwable;
 }

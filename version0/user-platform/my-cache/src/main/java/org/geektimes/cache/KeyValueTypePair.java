@@ -1,12 +1,13 @@
 package org.geektimes.cache;
 
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
+import java.util.List;
 import java.util.Objects;
 
-public class KeyValueTypePair {
+import static org.geektimes.commons.reflect.util.TypeUtils.resolveTypeArguments;
+
+
+class KeyValueTypePair {
     private final Class<?> keyType;
     private final Class<?> valueType;
 
@@ -38,66 +39,13 @@ public class KeyValueTypePair {
 
     public static KeyValueTypePair resolve(Class<?> targetClass) {
         assertCache(targetClass);
-        KeyValueTypePair pair = null;
-        while (targetClass != null) {
-            pair = resolveFromInterfaces(targetClass);
-            if (pair != null) {
-                break;
-            }
-
-            Type superType = targetClass.getGenericSuperclass();
-            if (superType instanceof ParameterizedType) {
-                pair = resolveFromType(superType);
-            }
-            if (pair != null) {
-                break;
-            }
-            //recursively
-            targetClass = targetClass.getSuperclass();
-        }
-        return pair;
-    }
-
-    private static KeyValueTypePair resolveFromInterfaces(Class<?> type) {
-        KeyValueTypePair pair = null;
-        for (Type superInterface : type.getGenericInterfaces()) {
-            pair = resolveFromType(superInterface);
-            if (pair != null) {
-                break;
-            }
-        }
-        return pair;
-    }
-
-    private static KeyValueTypePair resolveFromType(Type type) {
-        KeyValueTypePair pair = null;
-        if (type instanceof ParameterizedType) {
-            ParameterizedType pType = (ParameterizedType) type;
-            if (pType.getRawType() instanceof Class) {
-                Class<?> rawType = (Class<?>) pType.getRawType();
-                Type[] arguments = pType.getActualTypeArguments();
-                if (arguments.length == 2) {
-                    Type keyTypeArg = arguments[0];
-                    Type valueTypeArg = arguments[1];
-                    Class<?> keyType = asClass(keyTypeArg);
-                    Class<?> valueType = asClass(valueTypeArg);
-                    if (keyType != null && valueType != null) {
-                        pair = new KeyValueTypePair(keyType, valueType);
-                    }
-                }
-            }
-        }
-        return pair;
-    }
-
-    private static Class<?> asClass(Type typeArgument) {
-        if (typeArgument instanceof Class) {
-            return (Class<?>) typeArgument;
-        } else if (typeArgument instanceof TypeVariable) {
-            return asClass(((TypeVariable<?>) typeArgument).getBounds()[0]);
+        List<Class<?>> typeArguments = resolveTypeArguments(targetClass);
+        if (typeArguments.size() == 2) {
+            return new KeyValueTypePair(typeArguments.get(0), typeArguments.get(1));
         }
         return null;
     }
+
 
     public static void assertCache(Class<?> cacheClass) {
         if (cacheClass.isInterface()) {

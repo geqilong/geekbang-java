@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import static java.lang.String.format;
+import static java.util.Collections.emptyMap;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -66,7 +67,7 @@ public abstract class AbstractCacheManager implements CacheManager {
     @Override
     public <K, V, C extends Configuration<K, V>> Cache<K, V> createCache(String cacheName, C configuration) throws IllegalArgumentException {
         // If a Cache with the specified name is known to the CacheManager, a CacheException is thrown.
-        if (cacheRepository.contains(cacheName)){
+        if (!cacheRepository.getOrDefault(cacheName, emptyMap()).isEmpty()) {
             throw new CacheException(format("The Cache whose name is '%s' is already existed, " +
                     "please try another name to create a new Cache.", cacheName));
         }

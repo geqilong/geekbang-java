@@ -38,6 +38,10 @@ public class ExpirableEntry<K, V> implements Cache.Entry<K, V> {
         return value;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
     @Override
     public <T> T unwrap(Class<T> clazz) {
         T value = null;
@@ -78,9 +82,15 @@ public class ExpirableEntry<K, V> implements Cache.Entry<K, V> {
                 '}';
     }
 
-
     public boolean isExpired() {
-        return System.currentTimeMillis() > timestamp;
+        return getExpiredTime() < 1;
     }
 
+    public boolean isEternal() {
+        return Long.MAX_VALUE == getTimestamp();
+    }
+
+    public long getExpiredTime() {
+        return getTimestamp() - System.currentTimeMillis();
+    }
 }

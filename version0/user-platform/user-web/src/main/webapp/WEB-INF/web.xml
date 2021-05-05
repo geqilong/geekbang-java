@@ -14,6 +14,10 @@
         <listener-class>org.geektimes.projects.user.web.listener.TestingListener</listener-class>
     </listener>
 
+    <!--<listener>
+        <listener-class>org.geektimes.session.servlet.http.DistributedHttpSessionAttributeListener</listener-class>
+    </listener>-->
+
     <servlet>
         <servlet-name>default</servlet-name>
         <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
@@ -66,6 +70,22 @@
         <servlet-name>FrontControllerServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <!--<filter>
+        <filter-name>HttpSessionFilter</filter-name>
+        <filter-class>org.geektimes.session.servlet.http.DistributedHttpSessionFilter</filter-class>
+        <init-param>
+            &lt;!&ndash; Filter ≈‰÷√ = FilterConfig &ndash;&gt;
+            <param-name>javax.cache.CacheManager.uri</param-name>
+            <param-value>redis://127.0.0.1:6379/</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>HttpSessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+-->
 
     <servlet>
         <servlet-name>jolokia-agent</servlet-name>

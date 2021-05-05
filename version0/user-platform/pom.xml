@@ -18,6 +18,8 @@
         <module>my-rest-client</module>
         <module>my-reactive-messaging</module>
         <module>my-cache</module>
+        <module>my-session</module>
+        <module>my-commons</module>
     </modules>
 
     <properties>

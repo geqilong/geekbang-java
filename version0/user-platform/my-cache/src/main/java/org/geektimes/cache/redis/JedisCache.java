@@ -7,19 +7,23 @@ import org.geektimes.cache.serialization.Parsable;
 import redis.clients.jedis.Jedis;
 
 import javax.cache.CacheException;
-import javax.cache.CacheManager;
 import javax.cache.configuration.Configuration;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
 public class JedisCache<K extends Serializable, V extends Serializable> extends AbstractCache<K, V> implements Parsable<V> {
     private final Jedis jedis;
     protected final Parsable<V> parser;
+    private final byte[] keyPrefixBytes;
+    private final int keyPrefixBytesLength;
 
-    public JedisCache(CacheManager cacheManager, String cacheName, Configuration<K, V> configuration, Jedis jedis, Parsable parser) {
-        super(cacheManager, cacheName, configuration);
+    public JedisCache(JedisCacheManager jedisCacheManager, String cacheName, Configuration<K, V> configuration, Jedis jedis, Parsable parser) {
+        super(jedisCacheManager, cacheName, configuration);
         this.jedis = jedis;
         this.parser = (parser == null ? new FastJsonParser() : parser);
+        this.keyPrefixBytes = buildKeyPrefixBytes(cacheName);
+        this.keyPrefixBytesLength = keyPrefixBytes.length;
     }
 
     @Override
@@ -66,6 +70,19 @@ public class JedisCache<K extends Serializable, V extends Serializable> extends 
         if (this.jedis.isConnected()) {
             this.jedis.close();
         }
+    }
+    private byte[] buildKeyPrefixBytes(String cacheName) {
+        StringBuilder keyPrefixBuilder = new StringBuilder("JedisCache-").append(cacheName).append(":");
+        return keyPrefixBuilder.toString().getBytes(StandardCharsets.UTF_8);
+    }
+
+    private byte[] getKeyBytes(Object key) {
+        byte[] suffixBytes = serialize(key);
+        int suffixBytesLength = suffixBytes.length;
+        byte[] bytes = new byte[keyPrefixBytesLength + suffixBytesLength];
+        System.arraycopy(keyPrefixBytes, 0, bytes, 0, keyPrefixBytesLength);
+        System.arraycopy(suffixBytes, 0, bytes, keyPrefixBytesLength, suffixBytesLength);
+        return bytes;
     }
 
     @Override
