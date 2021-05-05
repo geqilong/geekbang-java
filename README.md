@@ -1,4 +1,15 @@
 # geekbang-java
+v0.20~v0.21 第9周作业
+  1.Spring Cache 与 Redis 整合
+    a.如何清除某个 Spring Cache 所有的 Keys 关联的对象
+	如果 Redis 中心化方案，Redis + Sentinel
+	如果 Redis 去中心化方案，Redis Cluster
+     答：在org.geektimes.cache.redis.JedisCache中实现，将所有Key保存到一个HashSet结构中，存取加锁，实现clearAll。（存在一定性能损耗）
+    b.如何将 RedisCacheManager 与 @Cacheable 注解打通
+     答：引入sping-cache相关依赖spring-context、spring-context-support、spring-data-redis，
+       创建org.geektimes.cache.configuration.CacheConfiguration加上@Configuration、@EnableCaching注解，并注入org.springframework.cache.CacheManager。
+
+
 v0.18~v0.19 第8周作业
   1.如何解决多个 WebSecurityConfigurerAdapter Bean 配置相互冲突的问题？
     提示：假设有两个 WebSecurityConfigurerAdapter Bean 定义，并且标注了不同的 @Order，其中一个关闭 CSRF，一个开启 CSRF，那么最终结果如何确定？
