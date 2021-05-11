@@ -12,8 +12,8 @@ public class Converters implements Iterable<Converter> {
     public static final int DEFAULT_PRIORITY = 100;
     private final Map<Class<?>, PriorityQueue<PrioritizedConverter>> typedConverters = new HashMap<>();
     private ClassLoader classloader;
-    private boolean addededDefaultConverters = false;
-    private boolean addededDiscoveredConverters = false;
+    private boolean addedDefaultConverters = false;
+    private boolean addedDiscoveredConverters = false;
 
     public Converters() {
         this(Thread.currentThread().getContextClassLoader());
@@ -28,19 +28,19 @@ public class Converters implements Iterable<Converter> {
     }
 
     public void addDefaultConverters() {
-        if (addededDefaultConverters) {
+        if (addedDefaultConverters) {
             return;
         }
         addConverters(ServiceLoader.load(Converter.class, classloader));
-        addededDefaultConverters = true;
+        addedDefaultConverters = true;
     }
 
     public void addDiscoveredConverters() {
-        if (addededDiscoveredConverters) {
+        if (addedDiscoveredConverters) {
             return;
         }
         addConverters(ServiceLoader.load(Converter.class, classloader));
-        addededDiscoveredConverters = true;
+        addedDiscoveredConverters = true;
     }
 
     private void addConverters(Iterable<Converter> converters) {

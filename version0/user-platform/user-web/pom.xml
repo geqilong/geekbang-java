@@ -149,6 +149,16 @@
             <scope>test</scope>
         </dependency>
 
+        <!--MyBatis-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+
         <!-- Apache Tomcat -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>

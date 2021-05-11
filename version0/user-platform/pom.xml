@@ -66,11 +66,13 @@
         <jolokia-client.version>1.6.2</jolokia-client.version>
         <jolokia.version>1.6.2</jolokia.version>
         <activemq.version>5.9.1</activemq.version>
-        <tomcat7.version>7.0.37</tomcat7.version>
+        <tomcat7.version>7.0.65</tomcat7.version>
         <lettuce.version>6.1.0.RELEASE</lettuce.version>
         <jedis.version>3.5.2</jedis.version>
         <protobuf.version>3.15.8</protobuf.version>
         <fastjson.version>1.2.70</fastjson.version>
+        <mybatis.version>3.5.7</mybatis.version>
+        <mybatis-spring.version>2.0.6</mybatis-spring.version>
 
         <!-- Spring 依赖版本 -->
         <spring-boot.version>2.4.5</spring-boot.version>
@@ -81,6 +83,7 @@
     <dependencyManagement>
 
         <dependencies>
+
             <!-- Spring Boot 2.4.5 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -89,6 +92,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!-- Servlet 3.1 API -->
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -250,6 +254,18 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-all</artifactId>
                 <version>${activemq.version}</version>
+            </dependency>
+
+            <!--MyBatis-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
             </dependency>
 
             <!-- Apache Tomcat -->

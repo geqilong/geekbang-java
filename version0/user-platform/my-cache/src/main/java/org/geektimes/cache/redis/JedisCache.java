@@ -6,11 +6,13 @@ import org.geektimes.cache.serialization.FastJsonParser;
 import org.geektimes.cache.serialization.Parsable;
 import redis.clients.jedis.Jedis;
 
+import javax.cache.Cache;
 import javax.cache.CacheException;
 import javax.cache.configuration.Configuration;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class JedisCache<K extends Serializable, V extends Serializable> extends AbstractCache<K, V> implements Parsable<V> {
@@ -60,8 +62,10 @@ public class JedisCache<K extends Serializable, V extends Serializable> extends 
 
     @Override
     protected void clearEntries() throws CacheException {
-        synchronized (LOCK) {
-            ALL_MY_KEYS.stream().forEach(key -> removeEntry(key));
+        Iterator<Entry<K, V>>  iterator = iterator();
+        while(iterator.hasNext()){
+            Cache.Entry<K,V> entry = iterator.next();
+            removeEntry(entry.getKey());
         }
     }
 

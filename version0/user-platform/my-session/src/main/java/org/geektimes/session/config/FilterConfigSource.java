@@ -1,4 +1,4 @@
-package org.geektimes.configuration.microprofile.config.source.impl;
+package org.geektimes.session.config;
 
 import org.geektimes.configuration.microprofile.config.source.MapBasedConfigSource;
 
