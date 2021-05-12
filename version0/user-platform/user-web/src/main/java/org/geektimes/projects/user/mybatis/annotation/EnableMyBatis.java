@@ -41,4 +41,39 @@ public @interface EnableMyBatis {
     String[] mapperLocations() default {};
 
     String environment() default "SqlSessionFactoryBean";
+
+    String transactionFactory() default "";
+
+    String configurationProperties() default "";
+
+    boolean failFast() default false;
+
+    String[] plugins() default {};
+
+    String[] typeHandlers() default {};
+
+    String typeHandlersPackage() default "";
+
+    String defaultEnumTypeHandler() default "";
+
+    String[] typeAliases() default {};
+
+    String typeAliasesPackage() default "";
+
+    String typeAliasesSuperType() default "";
+
+    String[] scriptingLanguageDrivers() default {};
+
+    String defaultScriptingLanguageDriver() default "";
+
+    String databaseIdProvider() default "";
+
+    String vfs() default "";
+
+    String cache() default "";
+
+    String objectFactory() default "";
+
+    String objectWrapperFactory() default "";
+
 }
