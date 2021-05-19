@@ -1,4 +1,9 @@
 # geekbang-java
+v0.23 第10周作业  
+  1.完善@org.geektimes.projects.user.mybatis.annotation.EnableMyBatis 实现，尽可能多地注入org.mybatis.spring.SqlSessionFactoryBean 中依赖的组件  
+   答：时间有限，仅提供了transactionFactory，configurationProperties，failFast，plugins的注入，详见org.geektimes.projects.user.mybatis.annotation.MyBatisBeanDefinitionRegistrar。  
+   
+   
 v0.20~v0.21 第9周作业  
   1.Spring Cache 与 Redis 整合  
      a.如何清除某个 Spring Cache 所有的 Keys 关联的对象  
