@@ -2,8 +2,8 @@ package org.geektimes.commons.hash;
 
 import java.util.*;
 
-public class ConsistentHashingWithHashNode extends AbstractConsistentHashing {
-    public ConsistentHashingWithHashNode(int nodeNum) {
+public class ConsistentHashingWithHashNodes extends AbstractConsistentHashing {
+    public ConsistentHashingWithHashNodes(int nodeNum) {
         super(nodeNum);
     }
 
@@ -24,7 +24,7 @@ public class ConsistentHashingWithHashNode extends AbstractConsistentHashing {
     }
 
     public static void main(String[] args) {
-        ConsistentHashingWithHashNode chhn = new ConsistentHashingWithHashNode(10);
+        ConsistentHashingWithHashNodes chhn = new ConsistentHashingWithHashNodes(10);
         Map<String, Integer> keyNumMap = new HashMap<>();
         //初始化
         SortedMap<Integer, HashNode> nodeMap = chhn.getNodeMap();
