@@ -1,4 +1,8 @@
 # geekbang-java
+v0.24 第11周作业  
+  1.通过 Java 实现两种（以及）更多的一致性 Hash 算法；（可选）实现服务节点动态更新
+  答：抄这个链接的:https://blog.csdn.net/suifeng629/article/details/81567777；做了一点抽象，在包org.geektimes.commons.hash下实现。
+
 v0.23 第10周作业  
   1.完善@org.geektimes.projects.user.mybatis.annotation.EnableMyBatis 实现，尽可能多地注入org.mybatis.spring.SqlSessionFactoryBean 中依赖的组件  
    答：时间有限，仅提供了transactionFactory，configurationProperties，failFast，plugins的注入，详见org.geektimes.projects.user.mybatis.annotation.MyBatisBeanDefinitionRegistrar。  
