@@ -20,6 +20,7 @@
         <module>my-cache</module>
         <module>my-session</module>
         <module>my-commons</module>
+        <module>spring-cloud-projects</module>
     </modules>
 
     <properties>
@@ -74,9 +75,15 @@
         <mybatis.version>3.5.7</mybatis.version>
         <mybatis-spring.version>2.0.6</mybatis-spring.version>
         <spring-boot-autoconfigure.version>2.4.5</spring-boot-autoconfigure.version>
+        <dubbo.version>2.7.10</dubbo.version>
 
         <!-- Spring 依赖版本 -->
         <spring-boot.version>2.4.5</spring-boot.version>
+        <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
+
+        <!-- Spring Cloud Alibaba -->
+        <spring.cloud.alibaba.version>2021.1</spring.cloud.alibaba.version>
+
         <junit.version>4.13</junit.version>
     </properties>
 
@@ -92,6 +99,46 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Alibaba Dependencies -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Apache Dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
             </dependency>
 
             <dependency>
