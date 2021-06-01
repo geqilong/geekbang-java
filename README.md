@@ -1,4 +1,9 @@
 # geekbang-java
+v0.25 第12周作业  
+  1.将上次 MyBatis@Enable 模块驱动，封装成 SpringBoot Starter 方式,参考:MyBatis Spring Project 里面会有 Spring Boot 实现
+  答：主要通过org.geektimes.projects.user.mybatis.configuration.MyBatisAutoConfiguration实现，引入spring-boot-autoconfigure依赖，META-INF目录下配置spring.factories。
+
+
 v0.24 第11周作业  
   1.通过 Java 实现两种（以及）更多的一致性 Hash 算法；（可选）实现服务节点动态更新
   答：抄这个链接的:https://blog.csdn.net/suifeng629/article/details/81567777；做了一点抽象，在包org.geektimes.commons.hash下实现。
