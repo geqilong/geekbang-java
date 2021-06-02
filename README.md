@@ -1,4 +1,10 @@
 # geekbang-java
+v0.26~v0.27 第13周作业  
+  1.基于文件系统为 Spring Cloud 提供 PropertySourceLocator实现
+    配置文件命名规则（META-INF/config/default.properties或者 META-INF/config/default.yaml）
+    可选：实现文件修改通知
+   答：在org.geektimes.projects.spring.cloud.config.propsource.FileSystemPropertySourceLocator中实现，META-INF/spring.factories中配置BootstrapConfiguration。  
+   
 v0.25 第12周作业  
   1.将上次 MyBatis@Enable 模块驱动，封装成 SpringBoot Starter 方式,参考:MyBatis Spring Project 里面会有 Spring Boot 实现
   答：主要通过org.geektimes.projects.user.mybatis.configuration.MyBatisAutoConfiguration实现，引入spring-boot-autoconfigure依赖，META-INF目录下配置spring.factories。
