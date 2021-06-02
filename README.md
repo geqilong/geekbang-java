@@ -2,7 +2,7 @@
 v0.26~v0.27 第13周作业  
   1.基于文件系统为 Spring Cloud 提供 PropertySourceLocator实现
     配置文件命名规则（META-INF/config/default.properties或者 META-INF/config/default.yaml）
-    可选：实现文件修改通知
+    可选：实现文件修改通知  
    答：在org.geektimes.projects.spring.cloud.config.propsource.FileSystemPropertySourceLocator中实现，META-INF/spring.factories中配置BootstrapConfiguration。  
    
 v0.25 第12周作业  
