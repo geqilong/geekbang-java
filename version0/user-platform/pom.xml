@@ -78,7 +78,7 @@
         <dubbo.version>2.7.10</dubbo.version>
 
         <!-- Spring 依赖版本 -->
-        <spring-boot.version>2.4.5</spring-boot.version>
+        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
         <spring.cloud-version>Hoxton.SR8</spring.cloud-version>
 
         <!-- Spring Cloud Alibaba -->
