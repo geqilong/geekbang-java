@@ -1,12 +1,12 @@
 server:
-  port:12345
+  port: 12345
 
 spring:
   application:
     name: eureka-server
 
-# 配置Eureka Client(可参考EurekaClientConfigBean)
+# 配置 Eureka Client（可参考 EurekaClientConfigBean）
 eureka:
   client:
     service-url:
-      defaultZone: 'http:127.0.0.1:${server.port}/eureka'
+      defaultZone: 'http://127.0.0.1:${server.port}/eureka'

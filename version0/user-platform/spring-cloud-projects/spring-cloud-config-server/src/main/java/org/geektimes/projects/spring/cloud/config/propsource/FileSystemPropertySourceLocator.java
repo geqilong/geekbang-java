@@ -29,7 +29,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 public class FileSystemPropertySourceLocator implements PropertySourceLocator {
     private static Logger logger = LoggerFactory.getLogger(FileSystemPropertySourceLocator.class);
     private static final String resourceFileName = "default.properties";
-    private static final String resourcePath = "/META-INF/config" + resourceFileName;
+    private static final String resourcePath = "/META-INF/config/" + resourceFileName;
     private static final String ENCODING = "UTF-8";
     private final ResourcePropertySource resourcePropertySource;
     private final ExecutorService executorService;
@@ -62,7 +62,9 @@ public class FileSystemPropertySourceLocator implements PropertySourceLocator {
     private void onMessagePropertiesChanged() {
         //获取对应文件系统中的文件
         try {
-            Path messagePropertiesFilePath = Paths.get(resourcePath);
+            ResourceLoader resourceLoader = new DefaultResourceLoader();
+            Resource resource = resourceLoader.getResource(resourcePath);
+            Path messagePropertiesFilePath = resource.getFile().toPath();
             //获取当前OS文件系统，新建WatchService
             WatchService watchService = FileSystems.getDefault().newWatchService();
             //获取资源文件所在目录

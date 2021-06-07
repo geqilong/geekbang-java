@@ -1,6 +1,12 @@
 package org.geektimes.configuration.microprofile.config.converter;
 
-import org.geektimes.configuration.microprofile.config.converter.impl.*;
+import org.geektimes.configuration.microprofile.config.converter.impl.ByteConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.IntegerConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.LongConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.ShortConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.FloatConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.DoubleConverter;
+import org.geektimes.configuration.microprofile.config.converter.impl.StringConverter;
 import org.junit.Before;
 import org.junit.Test;
 

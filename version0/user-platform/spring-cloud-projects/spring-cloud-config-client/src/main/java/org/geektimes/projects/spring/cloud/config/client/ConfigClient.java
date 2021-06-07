@@ -35,15 +35,15 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class ConfigClient {
 
-    @Value("${my.name}")
-    private String myName;
+    @Value("${id}")
+    private String id;
 
-    @Value("${my.age}")
-    private int myAge;
+    @Value("${name}")
+    private int name;
 
     @Bean
     public ApplicationRunner runner() {
-        return args -> System.out.printf("my.name = %s, my.age = %d %n", myName, myAge);
+        return args -> System.out.printf("id = %s, name = %d %n", id, name);
     }
 
 
