@@ -19,6 +19,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.geekbang.projects</groupId>
+            <artifactId>my-cache</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <!-- Spring Web MVC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
