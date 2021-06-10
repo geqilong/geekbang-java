@@ -1,4 +1,14 @@
 # geekbang-java
+v0.29 第14周作业  
+  1.利用 Redis 实现 Spring Cloud Bus 中的 BusBridge，避免强  
+    依赖于 Spring Cloud Stream  
+    难点：处理消息订阅  
+     目的：  
+       回顾 Spring 事件  
+       理解 Spring Cloud Bus 架构  
+       理解 Spring Cloud Stream  
+   答：不会。  
+   
 v0.26~v0.27 第13周作业  
   1.基于文件系统为 Spring Cloud 提供 PropertySourceLocator实现
     配置文件命名规则（META-INF/config/default.properties或者 META-INF/config/default.yaml）  
