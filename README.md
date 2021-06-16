@@ -1,4 +1,13 @@
 # geekbang-java
+v0.30 第15周作业
+  1.通过 GraalVM 将一个简单 Spring Boot 工程构建为 Native Image，要求：  
+      代码要自己手写 @Controller @RequestMapping("/helloworld")  
+      相关插件可以参考 Spring Native Samples  
+     （可选）理解 Hint 注解的使用  
+  答：放在native目录下了，解压HelloWorld.zip，在工程根路径下执行：mvn -Pnative -DskipTests package，需要注意的是，如果native-image.exe不在GrallVM_HOME/bin目录  
+      而在GrallVM_HOME/jre/bin下，需要设置环境变量JAVA_HOME为GrallVM_HOME/jre，native-maven-plugin:0.9.0构建工具默认从JAVA_HOME/bin下取native-image.exe，这是
+      一个坑。  
+  
 v0.29 第14周作业  
   1.利用 Redis 实现 Spring Cloud Bus 中的 BusBridge，避免强  
     依赖于 Spring Cloud Stream  
