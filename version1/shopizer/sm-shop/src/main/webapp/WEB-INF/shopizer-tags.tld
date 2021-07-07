@@ -282,8 +282,6 @@
             <rtexprvalue>true</rtexprvalue>
             <type>com.salesmanager.core.business.catalog.product.model.description.ProductDescription</type>
         </attribute>
-
-
     </tag>
 
     <tag>
@@ -310,8 +308,6 @@
             <rtexprvalue>false</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
-
     </tag>
 
     <tag>
@@ -320,6 +316,30 @@
         <body-content>empty</body-content>
     </tag>
 
+    <tag>
+        <name>custom-response-headers</name>
+        <tag-class>com.salesmanager.shop.tags.CustomResponseHeadersTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>attribute1</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <name>attribute2</name>
+            <required>false</required>
+            <rtexprvalue>-1</rtexprvalue>
+            <type>java.lang.Long</type>
+        </attribute>
+        <attribute>
+            <name>attribute3</name>
+            <required>true</required>
+            <rtexprvalue>1.0</rtexprvalue>
+            <type>java.lang.Float</type>
+        </attribute>
+    </tag>
 
 </taglib>
 
