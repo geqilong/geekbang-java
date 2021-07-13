@@ -17,14 +17,34 @@
 package org.geektimes.configuration.microprofile.config.source.servlet;
 
 import org.eclipse.microprofile.config.spi.ConfigSource;
+import org.geektimes.configuration.microprofile.config.source.MapBasedConfigSource;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static java.lang.String.format;
 
 /**
- * {@link ServletRequest} {@link ConfigSource}
- *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0.0
+ * ServletRequest ConfigSource
  */
-public class ServletRequestConfigSource {
+public class ServletRequestConfigSource extends MapBasedConfigSource {
+    private final HttpServletRequest request;
+
+    protected ServletRequestConfigSource(HttpServletRequest request) {
+        super("HttpServletRequest Parameters", 50);
+        this.request = request;
+    }
+
+    @Override
+    protected void prepareConfigData(Map configData) throws Throwable {
+        List<String> paramList = Collections.list(request.getParameterNames());
+        for (String param : paramList) {
+            configData.put(param, request.getParameter(param));
+        }
+    }
 }
