@@ -1,7 +1,7 @@
 # geekbang-java stage 1 submit logs
 
 v1.2 第2周作业  
-1.在 my-configuration 基础上，实现 ServletRequest 请求参数的 ConfigSource（MicroProfile Config），提供参考：Apache Commons Configuration中的org.apache.commons.configuration.web.ServletRequestConfiguration。
+1.在 my-configuration 基础上，实现 ServletRequest 请求参数的 ConfigSource（MicroProfile Config），提供参考：Apache Commons Configuration中的org.apache.commons.configuration.web.ServletRequestConfiguration。  
 答：在模块my-configuration中类org.geektimes.configuration.microprofile.config.source.servlet.ServletRequestConfigSource里实现。
 
 v1.0 第1周作业  
