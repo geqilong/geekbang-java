@@ -48,10 +48,7 @@ public class EmbeddedTomcatConfiguration implements BeanClassLoaderAware {
         return factory -> {
             if (webappDirectory != null) {
                 factory.addContextCustomizers(context -> {
-                    if (context instanceof StandardContext) {
-                        StandardContext standardContext = (StandardContext) context;
-                        standardContext.setDocBase(webappDirectory.getAbsolutePath());
-                    }
+                    context.setDocBase(webappDirectory.getAbsolutePath());
                 });
             }
         };

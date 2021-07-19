@@ -1,7 +1,9 @@
 package org.geektimes.configuration.microprofile.config.servlet.listener;
 
 import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.spi.ConfigBuilder;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
+import org.geektimes.configuration.microprofile.config.source.servlet.ServletRequestConfigSource;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
@@ -19,6 +21,8 @@ public class ConfigServletRequestListener implements ServletRequestListener {
         ClassLoader classLoader = servletContext.getClassLoader();
         ConfigProviderResolver configProviderResolver = ConfigProviderResolver.instance();
         Config config = configProviderResolver.getConfig(classLoader);
+        ConfigBuilder configBuilder = configProviderResolver.getBuilder();
+        configBuilder.withSources(new ServletRequestConfigSource(request));
         configThreadLocal.set(config);
     }
 
