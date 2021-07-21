@@ -1,4 +1,8 @@
 # geekbang-java stage 1 submit logs
+v1.4 第3周作业  
+1.通过 MicroProfile REST Client 实现 POST 接口去请求项目中的 ShutdownEndpoint，URI：http://127.0.0.1:8080/actuator/shutdown  
+  可选：完善 my-rest-client 框架 POST方法，实现org.geektimes.rest.client.DefaultInvocationBuilder#buildPost方法  
+ 答：在模块sm-shop的test中，com.salesmanager.test.shop.rest.service.MicroProfilePostRestClientTest里实现，org.geektimes.rest.client.DefaultInvocationBuilder#buildPost也已实现。  
 
 v1.2 第2周作业  
 1.在 my-configuration 基础上，实现 ServletRequest 请求参数的 ConfigSource（MicroProfile Config），提供参考：Apache Commons Configuration中的org.apache.commons.configuration.web.ServletRequestConfiguration。  
