@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4"> 
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8"> 
-    <output url="file://$MODULE_DIR$/target/classes"/>  
-    <output-test url="file://$MODULE_DIR$/target/test-classes"/>  
-    <content url="file://$MODULE_DIR$"> 
-      <excludeFolder url="file://$MODULE_DIR$/target"/>
-    </content>  
-    <orderEntry type="inheritedJdk"/>  
-    <orderEntry type="sourceFolder" forTests="false"/>  
-    <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project"/>  
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://D:/maven_repo/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
-  </component> 
+    <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project" />
+  </component>
 </module>
