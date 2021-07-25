@@ -1,15 +1,18 @@
 package org.geektimes.rest.client;
 
 import org.geektimes.rest.core.DefaultResponse;
+import org.geektimes.rest.util.HttpBodyConverter;
+import org.geektimes.rest.util.HttpBodyConverters;
 
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.InvocationCallback;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -19,11 +22,11 @@ import java.util.Map;
 import java.util.concurrent.Future;
 
 public class HttpPostInvocation implements Invocation {
-
+    private final HttpBodyConverters converters = new HttpBodyConverters();
     private final URI uri;
     private final URL url;
     private final MultivaluedMap<String, Object> headers;
-    private final Entity<Map> entity;
+    private final Entity<?> entity;
 
     HttpPostInvocation(URI uri, MultivaluedMap<String, Object> headers, Entity<Map> entity) {
         this.uri = uri;
@@ -59,10 +62,19 @@ public class HttpPostInvocation implements Invocation {
         }
     }
 
-    private void setEntityValues(HttpURLConnection connection) {
-        Map<String, String> map = this.entity.getEntity();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            connection.setRequestProperty(entry.getKey(), entry.getValue());
+    private void setEntityValues(HttpURLConnection connection) throws IOException {
+        if (entity != null && entity.getEntity() != null) {
+            Class<?> clazz = entity.getClass();
+            Type type = clazz.getGenericSuperclass();
+            Annotation[] annotations = entity.getAnnotations();
+            MediaType mediaType = entity.getMediaType();
+            HttpBodyConverter converter = converters.getWriteableConverter(clazz, type, annotations, mediaType);
+            if (converter.isWriteable(clazz, type, annotations, mediaType)) {
+                OutputStream outputStream = connection.getOutputStream();
+                long length = converter.getSize(entity.getEntity(), clazz, type, annotations, mediaType);
+                connection.setRequestProperty(HttpHeaders.CONTENT_LENGTH, Long.toString(length));
+                converter.writeTo(entity.getEntity(), clazz, type, annotations, mediaType, headers, outputStream);
+            }
         }
     }
 

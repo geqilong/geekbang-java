@@ -1,14 +1,15 @@
 package org.geektimes.configuration.microprofile.config.source.servlet;
 
-import org.geektimes.configuration.microprofile.config.source.MapBasedConfigSource;
+import org.geektimes.configuration.microprofile.config.source.EnumerableConfigSource;
 
 import javax.servlet.ServletConfig;
 import java.util.Enumeration;
-import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
-public class ServletConfigSource extends MapBasedConfigSource {
+public class ServletConfigSource extends EnumerableConfigSource {
 
     private final ServletConfig servletConfig;
 
@@ -18,11 +19,22 @@ public class ServletConfigSource extends MapBasedConfigSource {
     }
 
     @Override
-    protected void prepareConfigData(Map configData) throws Throwable {
-        Enumeration<String> parameterNames = servletConfig.getInitParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String parameterName = parameterNames.nextElement();
-            configData.put(parameterName, servletConfig.getInitParameter(parameterName));
-        }
+    protected Supplier<Enumeration<String>> namesSupplier() {
+        return new Supplier<Enumeration<String>>() {
+            @Override
+            public Enumeration<String> get() {
+                return servletConfig.getInitParameterNames();
+            }
+        };
+    }
+
+    @Override
+    protected Function<String, String> valueResolver() {
+        return new Function<String, String>() {
+            @Override
+            public String apply(String name) {
+                return servletConfig.getInitParameter(name);
+            }
+        };
     }
 }

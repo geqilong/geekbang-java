@@ -6,6 +6,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -56,5 +57,238 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest:2.2" level="project" />
+  </component>
+  <component name="WebModuleBuildComponent">
+    <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/user-web" />
+  </component>
+  <component name="WebModuleProperties">
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-validator-1.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.7/commons-validator-1.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-beanutils-1.9.4.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-logging-1.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-digester-2.1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/2.1/commons-digester-2.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-dbcp-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-dbcp/8.5.64/tomcat-dbcp-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-juli-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-juli/8.5.64/tomcat-juli-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-session">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-session-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="module" name="my-configuration">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-configuration-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/microprofile-config-api-2.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/eclipse/microprofile/config/microprofile-config-api/2.0/microprofile-config-api-2.0.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-cache">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-cache-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="module" name="my-commons">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-commons-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.annotation-api-1.3.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-lang-2.6.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.6/commons-lang-2.6.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-io-2.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.7/commons-io-2.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/cache-api-1.1.1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/cache/cache-api/1.1.1/cache-api-1.1.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/cdi-api-2.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.el-api-3.0.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.interceptor-api-1.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.inject-1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jedis-3.5.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/redis/clients/jedis/3.5.2/jedis-3.5.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/slf4j-api-1.7.30.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-pool2-2.9.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-pool2/2.9.0/commons-pool2-2.9.0.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-dependency-injection">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-dependency-injection-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/junit-4.13.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/junit/junit/4.13/junit-4.13.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/hamcrest-core-2.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/hamcrest-2.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-web-mvc">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-web-mvc-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-configuration-1.10.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-dbcp-1.4.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-pool-1.6.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.6/commons-pool-1.6.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/derby-10.1.3.1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/derby/derby/10.1.3.1/derby-10.1.3.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-jdbc-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jdbc/8.5.64/tomcat-jdbc-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-catalina-ha-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ha/8.5.64/tomcat-catalina-ha-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-coyote-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-coyote/8.5.64/tomcat-coyote-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-servlet-api-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-servlet-api/8.5.64/tomcat-servlet-api-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-jni-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jni/8.5.64/tomcat-jni-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-util-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-util/8.5.64/tomcat-util-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-tribes-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-tribes/8.5.64/tomcat-tribes-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-catalina-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina/8.5.64/tomcat-catalina-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-jsp-api-9.0.45.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jsp-api/9.0.45/tomcat-jsp-api-9.0.45.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-el-api-9.0.45.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-el-api/9.0.45/tomcat-el-api-9.0.45.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-annotations-api-9.0.45.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-annotations-api/9.0.45/tomcat-annotations-api-9.0.45.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-api-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-api/8.5.64/tomcat-api-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-util-scan-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-util-scan/8.5.64/tomcat-util-scan-8.5.64.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-jaspic-api-8.5.64.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jaspic-api/8.5.64/tomcat-jaspic-api-8.5.64.jar!/</url>
+    </containerElement>
+    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+    <webroots>
+      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
+    </webroots>
   </component>
 </module>
