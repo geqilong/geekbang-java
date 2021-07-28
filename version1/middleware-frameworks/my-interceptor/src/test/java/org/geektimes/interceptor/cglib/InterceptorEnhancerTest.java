@@ -17,10 +17,9 @@
 package org.geektimes.interceptor.cglib;
 
 import org.geektimes.interceptor.microprofile.faulttolerance.BulkheadInterceptor;
+import org.geektimes.interceptor.microprofile.faulttolerance.EchoService;
 import org.geektimes.interceptor.microprofile.faulttolerance.TimeoutInterceptor;
 import org.junit.Test;
-
-import org.geektimes.interceptor.microprofile.faulttolerance.EchoService;
 
 /**
  * {@link InterceptorEnhancer} Test
@@ -31,7 +30,7 @@ import org.geektimes.interceptor.microprofile.faulttolerance.EchoService;
 public class InterceptorEnhancerTest {
 
     @Test
-    public void test() {
+    public void testCglibEnhancer() {
         InterceptorEnhancer enhancer = new InterceptorEnhancer();
         EchoService echoService = new EchoService();
         Object[] interceptors = new Object[]{
@@ -42,4 +41,5 @@ public class InterceptorEnhancerTest {
         EchoService echoServiceProxy = (EchoService) proxy;
         echoServiceProxy.echo("Hello,World");
     }
+
 }

@@ -1,4 +1,12 @@
 # geekbang-java stage 1 submit logs
+v1.6 第4周作业
+1.将 my-interceptor工程代码增加JDK动态代理，将@BulkHead 等注解标注在接口上，实现方法拦截。  
+  步骤：  
+     1. 通过 JDK 动态代理实现类似 InterceptorEnhancer 的代码  
+     2. 实现 JDK 动态代理方法的 InvocationContext  
+  答：主要通过my-interceptor模块中org.geektimes.interceptor.jdk.DynamicProxyEnhancer、  
+     org.geektimes.interceptor.DynoxyMethodInvocationContext来实现，测试类org.geektimes.interceptor.jdk.DynamicProxyEnhancerTest。
+
 v1.4 第3周作业  
 1.通过 MicroProfile REST Client 实现 POST 接口去请求项目中的 ShutdownEndpoint，URI：http://127.0.0.1:8080/actuator/shutdown  
   可选：完善 my-rest-client 框架 POST方法，实现org.geektimes.rest.client.DefaultInvocationBuilder#buildPost方法  
