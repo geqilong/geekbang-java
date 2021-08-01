@@ -14,30 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geektimes.interceptor;
+package org.geektimes.microprofile.faulttolerance;
 
+import org.geektimes.interceptor.ReflectiveMethodInvocationContext;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 
-import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
-
 /**
- * {@link ChainableInvocationContext} Test
+ * {@link BulkheadInterceptor} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public class ChainableInvocationContextTest {
+public class BulkheadInterceptorTest {
+
+    private BulkheadInterceptor interceptor = new BulkheadInterceptor();
 
     @Test
-    public void test() throws Exception {
+    public void testInThreadIsolation() throws Throwable {
+        EchoService echoService = new EchoService();
+        Method method = EchoService.class.getMethod("echo", Object.class);
+        ReflectiveMethodInvocationContext context = new ReflectiveMethodInvocationContext
+                (echoService, method, "Hello,World");
+        interceptor.execute(context);
+    }
+
+    @Test
+    public void testInSemaphoreIsolation() throws Throwable {
         EchoService echoService = new EchoService();
         Method method = EchoService.class.getMethod("echo", String.class);
-        ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
+        ReflectiveMethodInvocationContext context = new ReflectiveMethodInvocationContext
                 (echoService, method, "Hello,World");
-        ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
-        context.proceed();
-
+        interceptor.execute(context);
     }
+
 }
+

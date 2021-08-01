@@ -16,7 +16,6 @@
  */
 package org.geektimes.commons.reflect.util;
 
-import javax.annotation.Priority;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -479,6 +478,38 @@ public abstract class ClassUtils {
         }
         // isAssignableFrom
         return superType.isAssignableFrom(targetType);
+    }
+
+    /**
+     * the semantics is same as {@link Class#isAssignableFrom(Class)}
+     *
+     * @param targetType the target type
+     * @param superTypes the super types
+     * @return see {@link Class#isAssignableFrom(Class)}
+     * @since 1.0.0
+     */
+    public static boolean isDerived(Class<?> targetType, Class<?>... superTypes) {
+        // any argument is null
+        if (superTypes == null || superTypes.length == 0 || targetType == null) {
+            return false;
+        }
+        boolean derived = false;
+        for (Class<?> superType : superTypes) {
+            if (isAssignableFrom(superType, targetType)) {
+                derived = true;
+                break;
+            }
+        }
+        return derived;
+    }
+
+    public static Class<?>[] getTypes(Object... args) {
+        int size = (args == null ? 0 : args.length);
+        Class[] types = new Class[size];
+        for (int i = 0; i < size; i++) {
+            types[i] = args[i].getClass();
+        }
+        return types;
     }
 
     /**

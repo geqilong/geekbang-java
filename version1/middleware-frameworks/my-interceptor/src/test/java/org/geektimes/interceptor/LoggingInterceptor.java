@@ -16,28 +16,22 @@
  */
 package org.geektimes.interceptor;
 
-import org.junit.Test;
-
-import java.lang.reflect.Method;
-
-import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+import java.util.logging.Logger;
 
 /**
- * {@link ChainableInvocationContext} Test
- *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0.0
+ * @since
  */
-public class ChainableInvocationContextTest {
+@Logging
+@Interceptor
+public class LoggingInterceptor extends AnnotatedInterceptor<Logging> {
 
-    @Test
-    public void test() throws Exception {
-        EchoService echoService = new EchoService();
-        Method method = EchoService.class.getMethod("echo", String.class);
-        ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
-                (echoService, method, "Hello,World");
-        ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
-        context.proceed();
-
+    @Override
+    protected Object execute(InvocationContext context, Logging logging) throws Throwable {
+        Logger logger = Logger.getLogger(logging.name());
+        logger.info((String) context.getParameters()[0]);
+        return context.proceed();
     }
 }

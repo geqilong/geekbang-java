@@ -14,30 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geektimes.interceptor;
+package org.geektimes.microprofile.faulttolerance;
 
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 
-import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
-
 /**
- * {@link ChainableInvocationContext} Test
+ * {@link EchoService} CGLIB Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public class ChainableInvocationContextTest {
+public class EchoServiceCglibTest {
 
     @Test
-    public void test() throws Exception {
-        EchoService echoService = new EchoService();
-        Method method = EchoService.class.getMethod("echo", String.class);
-        ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
-                (echoService, method, "Hello,World");
-        ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
-        context.proceed();
+    public void test() {
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(EchoService.class);
+        enhancer.setCallback(new MethodInterceptor() {
 
+            // @Bulkhead
+
+            @Override
+            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+                return proxy.invokeSuper(obj, args);
+            }
+        });
+
+        EchoService echoService = (EchoService) enhancer.create();
+
+        echoService.echo("Hello,World");
     }
 }

@@ -1,5 +1,6 @@
 package com.salesmanager.shop.application;
 
+import org.apache.activemq.command.ActiveMQTextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationRunner;
@@ -13,6 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.TextMessage;
 import javax.sql.DataSource;
 
 
@@ -42,6 +46,21 @@ public class ShopApplication extends SpringBootServletInitializer {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
         firewall.setAllowSemicolon(true);
         return firewall;
+    }
+
+    @Bean
+    @Autowired
+    public ApplicationRunner runner2(MessageProducer messageProducer) {
+        return args -> {
+            TextMessage textMessage = createTextMessage("Hello,World");
+            messageProducer.send(textMessage);
+        };
+    }
+
+    private TextMessage createTextMessage(String content) throws JMSException {
+        ActiveMQTextMessage textMessage = new ActiveMQTextMessage();
+        textMessage.setText(content);
+        return textMessage;
     }
 
 }

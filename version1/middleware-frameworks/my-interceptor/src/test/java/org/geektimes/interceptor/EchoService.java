@@ -16,28 +16,16 @@
  */
 package org.geektimes.interceptor;
 
-import org.junit.Test;
-
-import java.lang.reflect.Method;
-
-import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
-
 /**
- * {@link ChainableInvocationContext} Test
+ * Echo Service
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0.0
+ * @since
  */
-public class ChainableInvocationContextTest {
+public class EchoService {
 
-    @Test
-    public void test() throws Exception {
-        EchoService echoService = new EchoService();
-        Method method = EchoService.class.getMethod("echo", String.class);
-        ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
-                (echoService, method, "Hello,World");
-        ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
-        context.proceed();
-
+    @Logging
+    public String echo(String message) {
+        return "[ECHO] : " + message;
     }
 }

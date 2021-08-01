@@ -14,30 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geektimes.interceptor;
-
-import org.junit.Test;
-
-import java.lang.reflect.Method;
-
-import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
+package org.geektimes.microprofile.faulttolerance;
 
 /**
- * {@link ChainableInvocationContext} Test
+ * {@link TimeoutInterceptor} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public class ChainableInvocationContextTest {
-
-    @Test
-    public void test() throws Exception {
-        EchoService echoService = new EchoService();
-        Method method = EchoService.class.getMethod("echo", String.class);
-        ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
-                (echoService, method, "Hello,World");
-        ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
-        context.proceed();
-
-    }
+public class TimeoutInterceptorTest {
 }

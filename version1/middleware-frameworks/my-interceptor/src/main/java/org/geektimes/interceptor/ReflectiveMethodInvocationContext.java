@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.requireNonNull;
+
 public class ReflectiveMethodInvocationContext implements InvocationContext {
 
     private final Object target;
@@ -14,44 +16,46 @@ public class ReflectiveMethodInvocationContext implements InvocationContext {
     private final Map<String, Object> contextData;
 
     public ReflectiveMethodInvocationContext(Object target, Method method, Object... parameters) {
+        requireNonNull(target, "The target instance must not be null");
+        requireNonNull(method, "The method must not be null");
         this.target = target;
         this.method = method;
-        this.parameters = parameters;
+        this.setParameters(parameters);
         this.contextData = new HashMap<>();
     }
 
     @Override
-    public Object getTarget() {
+    public final Object getTarget() {
         return target;
     }
 
     @Override
-    public Object getTimer() {
-        throw new UnsupportedOperationException();
+    public final Object getTimer() {
+        return null;
     }
 
     @Override
-    public Method getMethod() {
+    public final Method getMethod() {
         return method;
     }
 
     @Override
-    public Constructor<?> getConstructor() {
-        throw new UnsupportedOperationException("ReflectiveMethodInvocationContext does not support Constructor!");
+    public final Constructor<?> getConstructor() {
+        return null;
     }
 
     @Override
-    public Object[] getParameters() {
+    public final Object[] getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Object[] params) {
+    public final void setParameters(Object[] params) {
         this.parameters = params;
     }
 
     @Override
-    public Map<String, Object> getContextData() {
+    public final Map<String, Object> getContextData() {
         return contextData;
     }
 
