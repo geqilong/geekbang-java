@@ -30,6 +30,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
@@ -45,6 +47,8 @@ import static org.geektimes.commons.util.AnnotationUtils.findAnnotation;
  */
 public abstract class AnnotatedInterceptor<A extends Annotation> implements Interceptor, Prioritized {
     private static final Class<? extends Annotation> INTERCEPTOR_ANNOTATION_TYPE = javax.interceptor.Interceptor.class;
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     private final Class<A> bindingAnnotationType;
 
@@ -103,14 +107,20 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
         List<Class<?>> typeArguments = TypeUtils.resolveTypeArguments(getClass());
         Class<A> annotationType = null;
         for (Class<?> typeArgument : typeArguments) {
-            if (typeArgument.isAnnotation() && typeArgument.isAnnotationPresent(InterceptorBinding.class)) {
-                annotationType = (Class<A>) typeArgument;
+            if (typeArgument.isAnnotation()) {
+                if (!typeArgument.isAnnotationPresent(InterceptorBinding.class)) {
+                    if (logger.isLoggable(Level.SEVERE)) {
+                        logger.severe(format("The annotatingType[%s] should annotate %s",
+                                typeArgument.getName(),
+                                InterceptorBinding.class.getName()));
+                    }
+                } else {
+                    annotationType = (Class<A>) typeArgument;
+                    assertInterceptorBindingAnnotationType(annotationType);
+                }
                 break;
             }
         }
-
-        assertInterceptorBindingAnnotationType(annotationType);
-
         return annotationType;
     }
 
@@ -132,7 +142,7 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
 
     protected A findInterceptorBindingAnnotation(Method method) {
         A annotation = findAnnotation(method, bindingAnnotationType);
-        if (annotation == null && method != null) {
+        if (annotation == null && method != null && bindingAnnotationType != null) {
             annotation = method.getDeclaringClass().getAnnotation(bindingAnnotationType);
         }
         return annotation;

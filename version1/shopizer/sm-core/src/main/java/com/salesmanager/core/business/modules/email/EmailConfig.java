@@ -1,6 +1,5 @@
 package com.salesmanager.core.business.modules.email;
 
-import com.sun.javaws.jnl.PropertyDesc;
 import org.json.simple.JSONObject;
 
 import javax.management.openmbean.CompositeData;

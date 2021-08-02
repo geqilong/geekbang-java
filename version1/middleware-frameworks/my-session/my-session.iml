@@ -220,6 +220,9 @@
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="module" module-name="my-interceptor" />
+    <orderEntry type="library" name="Maven: cglib:cglib:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.ow2.asm:asm:7.1" level="project" />
     <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.63.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.63.Final" level="project" />

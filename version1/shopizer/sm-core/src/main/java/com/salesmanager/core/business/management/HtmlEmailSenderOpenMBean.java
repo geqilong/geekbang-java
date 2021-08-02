@@ -2,7 +2,6 @@ package com.salesmanager.core.business.management;
 
 import com.salesmanager.core.business.modules.email.EmailConfig;
 import com.salesmanager.core.business.modules.email.HtmlEmailSender;
-import com.sun.javaws.jnl.PropertyDesc;
 
 import javax.management.*;
 import javax.management.openmbean.*;
