@@ -1,4 +1,9 @@
 # geekbang-java stage 1 submit logs
+v1.8 第5周作业  
+1.参考实现类org.geektimes.cache.interceptor.CachePutInterceptor，实现 @javax.cache.annotation.CacheRemove 注解的@Interceptor Class  
+  答：实现比较简单，见org.geektimes.cache.interceptor.CacheRemoveInterceptor，测试类在org.geektimes.cache.interceptor.CachePutInterceptorTest中，  
+    新增了NewCachePut、NewCacheRemove注解。
+
 v1.6 第4周作业
 1.将 my-interceptor工程代码增加JDK动态代理，将@BulkHead 等注解标注在接口上，实现方法拦截。  
   步骤：  
