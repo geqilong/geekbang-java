@@ -1,6 +1,7 @@
 package org.geektimes.cache.interceptor;
 
 import org.geektimes.interceptor.AnnotatedInterceptor;
+
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
@@ -10,24 +11,24 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 /**
- * Cache Put Interceptor
+ * Cache Remove Interceptor
  */
 @Interceptor
-@NewCachePut
-public class CachePutInterceptor extends AnnotatedInterceptor<NewCachePut> {
+@NewCacheRemove
+public class CacheRemoveInterceptor extends AnnotatedInterceptor<NewCacheRemove> {
     private CachingProvider cachingProvider = Caching.getCachingProvider();
     private CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    public CachePutInterceptor() {
+    public CacheRemoveInterceptor() {
         super();
         setPriority(600);
     }
 
     @Override
-    protected Object execute(InvocationContext context, NewCachePut cachePut) throws Throwable {
-        String cacheName = cachePut.cacheName();
+    protected Object execute(InvocationContext context, NewCacheRemove cacheRemove) throws Throwable {
+        String cacheName = cacheRemove.cacheName();
         Cache cache = getCache(cacheName);
-        boolean afterInvocation = cachePut.afterInvocation();
+        boolean afterInvocation = cacheRemove.afterInvocation();
         //The result of target method
         Object result = context.proceed();
         if (afterInvocation) {
@@ -39,8 +40,7 @@ public class CachePutInterceptor extends AnnotatedInterceptor<NewCachePut> {
 
     private void doCacheOps(Cache cache, Object[] parameters) {
         Object key = parameters[0];
-        Object value = parameters[1];
-        cache.put(key, value);
+        cache.remove(key);
     }
 
     private Cache getCache(String cacheName) {
@@ -51,5 +51,5 @@ public class CachePutInterceptor extends AnnotatedInterceptor<NewCachePut> {
         }
         return cache;
     }
-}
 
+}

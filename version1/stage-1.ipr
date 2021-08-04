@@ -112,6 +112,8 @@ under the License.
       <module filepath="$PROJECT_DIR$/middleware-frameworks/my-rpc/my-rpc.iml"/>
       <module filepath="$PROJECT_DIR$/middleware-frameworks/my-http-server/my-http-server.iml"/>
       <module filepath="$PROJECT_DIR$/middleware-frameworks/my-gateway/my-gateway.iml"/>
+      <module filepath="$PROJECT_DIR$/middleware-frameworks/my-fault-tolerance/my-fault-tolerance.iml"/>
+      <module filepath="$PROJECT_DIR$/middleware-frameworks/my-cdi/my-cdi.iml"/>
       <module filepath="$PROJECT_DIR$/middleware-frameworks/middleware-frameworks.iml"/>
       <module filepath="$PROJECT_DIR$/user-platform/user-web/user-web.iml"/>
       <module filepath="$PROJECT_DIR$/user-platform/servlet-web/servlet-web.iml"/>

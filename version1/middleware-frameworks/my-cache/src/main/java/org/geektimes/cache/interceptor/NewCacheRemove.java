@@ -1,16 +1,12 @@
 package org.geektimes.cache.interceptor;
 
-
 import javax.interceptor.InterceptorBinding;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @InterceptorBinding
-public @interface NewCachePut {
+public @interface NewCacheRemove {
     String cacheName() default "";
     boolean afterInvocation() default true;
 }
