@@ -245,7 +245,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      * with the key previously.</p>
      * <p>
      * If the cache is configured write-through the associated
-     * {@link CacheWriter#write(Cache.Entry)} method will be called.
+     * {@link CacheWriter#write(Entry)} method will be called.
      * </p>
      * <p>
      * Current method calls the methods of {@link ExpiryPolicy}:
@@ -268,7 +268,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      *                               configured for the {@link Cache}
      * @see #put(Object, Object)
      * @see #getAndReplace(Object, Object)
-     * @see CacheWriter#write(Cache.Entry)
+     * @see CacheWriter#write(Entry)
      */
     @Override
     public V getAndPut(K key, V value) {
@@ -342,7 +342,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      * except that the action is performed atomically.
      * <p>
      * If the cache is configured write-through, and this method returns true,
-     * the associated {@link CacheWriter#write(Cache.Entry)} method will be called.
+     * the associated {@link CacheWriter#write(Entry)} method will be called.
      * </p>
      *
      * <p>
@@ -387,7 +387,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      * <p>
      * When iterating over a cache it must be assumed that the underlying
      * cache may be changing, with entries being added, removed, evicted
-     * and expiring. {@link java.util.Iterator#next()} may therefore return
+     * and expiring. {@link Iterator#next()} may therefore return
      * null.
      *
      * <p>
@@ -605,8 +605,8 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      */
     @Override
     public void removeAll(Set<? extends K> keys) {
-        for (K key : keys) {
-            remove(key);
+        for (Object key : keys.toArray()) {
+            remove((K) key);
         }
     }
 
@@ -830,9 +830,9 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     }
 
     /**
-     * Contains the {@link Cache.Entry} by the specified key or not.
+     * Contains the {@link Entry} by the specified key or not.
      *
-     * @param key the key of {@link Cache.Entry}
+     * @param key the key of {@link Entry}
      * @return <code>true</code> if contains, or <code>false</code>
      * @throws CacheException     it there is a problem checking the mapping
      * @throws ClassCastException if the implementation is configured to perform
@@ -843,10 +843,10 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     protected abstract boolean containsEntry(K key) throws CacheException, ClassCastException;
 
     /**
-     * Get the {@link Cache.Entry} by the specified key
+     * Get the {@link Entry} by the specified key
      *
      * @param key the key of {@link Entry}
-     * @return the existed {@link Cache.Entry} associated with the given key
+     * @return the existed {@link Entry} associated with the given key
      * @throws CacheException     if there is a problem fetching the value
      * @throws ClassCastException if the implementation is configured to perform
      *                            runtime-type-checking, and the key or value
@@ -856,7 +856,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     protected abstract ExpirableEntry<K, V> getEntry(K key) throws CacheException, ClassCastException;
 
     /**
-     * Put the specified {@link javax.cache.Cache.Entry} into cache.
+     * Put the specified {@link Entry} into cache.
      *
      * @param entry The new instance of {@link Entry<K,V>} is created by {@link Cache}
      * @throws CacheException     if there is a problem doing the put
@@ -868,10 +868,10 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     protected abstract void putEntry(ExpirableEntry<K, V> entry) throws CacheException, ClassCastException;
 
     /**
-     * Remove the specified {@link Cache.Entry} from cache.
+     * Remove the specified {@link Entry} from cache.
      *
      * @param key the key of {@link Entry}
-     * @return the removed {@link Cache.Entry} associated with the given key
+     * @return the removed {@link Entry} associated with the given key
      * @throws CacheException     if there is a problem doing the remove
      * @throws ClassCastException if the implementation is configured to perform
      *                            runtime-type-checking, and the key or value
@@ -881,14 +881,14 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     protected abstract ExpirableEntry<K, V> removeEntry(K key) throws CacheException, ClassCastException;
 
     /**
-     * Clear all {@link Cache.Entry enties} from cache.
+     * Clear all {@link Entry enties} from cache.
      *
      * @throws CacheException if there is a problem doing the clear
      */
     protected abstract void clearEntries() throws CacheException;
 
     /**
-     * Get all keys of {@link Cache.Entry} in the {@link Cache}
+     * Get all keys of {@link Entry} in the {@link Cache}
      *
      * @return the non-null read-only {@link Set}
      */
@@ -1006,10 +1006,10 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
      *                            immediately expired.
      *                            <code>null</code> will result in no change to the previously understood expiry
      *                            {@link Duration}.
-     * @param removedExpiredEntry the expired {@link Cache.Entry} is removed or not.
-     *                            If <code>true</code>, the {@link Cache.Entry} will be removed and publish an
+     * @param removedExpiredEntry the expired {@link Entry} is removed or not.
+     *                            If <code>true</code>, the {@link Entry} will be removed and publish an
      *                            {@link EventType#EXPIRED} of {@link CacheEntryEvent}.
-     * @return <code>true</code> indicates the specified {@link Cache.Entry} should be expired.
+     * @return <code>true</code> indicates the specified {@link Entry} should be expired.
      */
     private boolean handleExpiryPolicy(ExpirableEntry<K, V> entry, Duration duration, boolean removedExpiredEntry) {
 

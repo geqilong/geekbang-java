@@ -39,13 +39,14 @@ import static org.geektimes.commons.function.Streams.stream;
 import static org.geektimes.commons.util.AnnotationUtils.findAnnotation;
 
 /**
- * The abstract annotated {@link Interceptor @Interceptor} class
+ * The abstract annotated {@link javax.interceptor.Interceptor @Interceptor} class
  *
  * @param <A> the type of {@link Annotation}
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
 public abstract class AnnotatedInterceptor<A extends Annotation> implements Interceptor, Prioritized {
+
     private static final Class<? extends Annotation> INTERCEPTOR_ANNOTATION_TYPE = javax.interceptor.Interceptor.class;
 
     private final Logger logger = Logger.getLogger(getClass().getName());
@@ -76,7 +77,7 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
     }
 
     @AroundInvoke
-    public Object execute(InvocationContext context) throws Throwable {
+    public final Object execute(InvocationContext context) throws Throwable {
         A bindingAnnotation = findInterceptorBindingAnnotation(context.getMethod());
         if (bindingAnnotation == null) { // try to find the Constructor
             bindingAnnotation = findInterceptorBindingAnnotation(context.getConstructor());
@@ -108,9 +109,10 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
         Class<A> annotationType = null;
         for (Class<?> typeArgument : typeArguments) {
             if (typeArgument.isAnnotation()) {
-                if (!typeArgument.isAnnotationPresent(InterceptorBinding.class)) {
+                annotationType = (Class<A>) typeArgument;
+                if (!annotationType.isAnnotationPresent(InterceptorBinding.class)) {
                     if (logger.isLoggable(Level.SEVERE)) {
-                        logger.severe(format("The annotatingType[%s] should annotate %s",
+                        logger.severe(format("The annotationType[%s] should annotate %s",
                                 typeArgument.getName(),
                                 InterceptorBinding.class.getName()));
                     }
@@ -121,6 +123,7 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
                 break;
             }
         }
+
         return annotationType;
     }
 
@@ -142,7 +145,7 @@ public abstract class AnnotatedInterceptor<A extends Annotation> implements Inte
 
     protected A findInterceptorBindingAnnotation(Method method) {
         A annotation = findAnnotation(method, bindingAnnotationType);
-        if (annotation == null && method != null && bindingAnnotationType != null) {
+        if (annotation == null && method != null) {
             annotation = method.getDeclaringClass().getAnnotation(bindingAnnotationType);
         }
         return annotation;

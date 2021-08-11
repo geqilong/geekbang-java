@@ -241,6 +241,12 @@
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.6" level="project" />
     <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.1.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.63.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.63.Final" level="project" />

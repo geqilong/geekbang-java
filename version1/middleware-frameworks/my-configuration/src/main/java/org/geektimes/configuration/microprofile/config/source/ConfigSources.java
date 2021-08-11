@@ -4,10 +4,9 @@ import org.eclipse.microprofile.config.spi.ConfigSource;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.concurrent.ConcurrentSkipListSet;
 
-import static java.util.Collections.sort;
 import static java.util.ServiceLoader.load;
 import static java.util.stream.Stream.of;
 
@@ -17,7 +16,7 @@ public class ConfigSources implements Iterable<ConfigSource> {
 
     private boolean addedDiscoveredConfigSources;
 
-    private List<ConfigSource> configSources = new LinkedList<>();
+    private SortedSet<ConfigSource> configSources = new ConcurrentSkipListSet<>(ConfigSourceOrdinalComparator.INSTANCE);
 
     private ClassLoader classLoader;
 
@@ -63,7 +62,6 @@ public class ConfigSources implements Iterable<ConfigSource> {
 
     public void addConfigSources(Iterable<ConfigSource> configSources) {
         configSources.forEach(this.configSources::add);
-        sort(this.configSources, ConfigSourceOrdinalComparator.INSTANCE);
     }
 
     private ConfigSource newInstance(Class<? extends ConfigSource> configSourceClass) {

@@ -16,7 +16,6 @@
  */
 package org.geektimes.commons.reflect.util;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -171,7 +170,7 @@ public abstract class ClassUtils {
      * reference as well).
      *
      * @return the default ClassLoader (never <code>null</code>)
-     * @see java.lang.Thread#getContextClassLoader()
+     * @see Thread#getContextClassLoader()
      */
     public static ClassLoader getClassLoader() {
         return getClassLoader(ClassUtils.class);
@@ -504,7 +503,7 @@ public abstract class ClassUtils {
     }
 
     public static Class<?>[] getTypes(Object... args) {
-        int size = (args == null ? 0 : args.length);
+        int size = args == null ? 0 : args.length;
         Class[] types = new Class[size];
         for (int i = 0; i < size; i++) {
             types[i] = args[i].getClass();
@@ -557,25 +556,4 @@ public abstract class ClassUtils {
         return type != null && !void.class.equals(type) && !Void.class.equals(type);
     }
 
-    public static <A extends Annotation> A findAnnotation(Class<?> type, Class<A> annotationType) {
-        if (Object.class.equals(type) || type == null) {
-            return null;
-        }
-        A annotation = type.getAnnotation(annotationType);
-        if (annotation == null) {
-            // find the annotation from the super interfaces
-            for (Class<?> interfaceType : type.getInterfaces()) {
-                annotation = interfaceType.getAnnotation(annotationType);
-                if (annotation != null) {
-                    break;
-                }
-            }
-        }
-
-        if (annotation == null) {
-            // find the annotation from the super class recursively
-            annotation = findAnnotation(type.getSuperclass(), annotationType);
-        }
-        return annotation;
-    }
 }
