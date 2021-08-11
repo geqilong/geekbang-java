@@ -1,4 +1,12 @@
 # geekbang-java stage 1 submit logs
+v2.1 第6周作业  
+1.增加一个注解名为 @ConfigSources，使其能够关联多个@ConfigSource，并且在 @ConfigSource 使用Repeatable，可以对比参考 Spring 中 @PropertySources 与@PropertySource，  
+  并且文字说明 Java 8 @Repeatable 实现原理。
+  可选作业，根据 URL 与 URLStreamHandler 的关系，扩展一个自定义协议，可参考sun.net.www.protocol.classpath.Handler  
+答：很简单，见my-configuration模块org.geektimes.configuration.microprofile.config.annotation.ConfigSources，  
+   测试类为org.geektimes.configuration.microprofile.config.annotation.ConfigSourcesTest，时间有限，写的比较粗糙；  
+   Java 8 @Repeatable看网上说法是一种语法糖，通过反射获取重复注解。
+
 v1.8 第5周作业  
 1.参考实现类org.geektimes.cache.interceptor.CachePutInterceptor，实现 @javax.cache.annotation.CacheRemove 注解的@Interceptor Class  
   答：实现比较简单，见org.geektimes.cache.interceptor.CacheRemoveInterceptor，测试类在org.geektimes.cache.interceptor.CachePutInterceptorTest中，  
