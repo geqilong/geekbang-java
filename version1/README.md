@@ -4,7 +4,7 @@ v2.2 第7周作业
   答：工作原理：@Validated支持支持类型、方法、参数级校验。方法参数级别的通过调用SpringMVC中org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument里的  
      org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.validateIfApplicable中对标注@Validated注解的参数进行校验；  
      方法级别的校验通过org.springframework.validation.beanvalidation.MethodValidationPostProcessor以SpringAOP方式拦截方法执行校验；类级别的对其中每个方法都执行校验。  
-     标注Validated注解声明类或方法或方法参数需要校验，Spring Validator接口可以让用户自定义校验过程,Validated注解是JSR-303 Bean Validation @javax.validation.Valid注解的一个变种，增加了组校验的支持，  
+     标注Validated注解声明类或方法或方法参数需要校验，Spring Validator接口可以让用户自定义校验过程,Validated注解是JSR-303 Bean Validation @javax.validation.Valid注解的一个变种，增加了组校验的支持。  
 
 v2.1 第6周作业  
 1.增加一个注解名为 @ConfigSources，使其能够关联多个@ConfigSource，并且在 @ConfigSource 使用Repeatable，可以对比参考 Spring 中 @PropertySources 与@PropertySource，  
