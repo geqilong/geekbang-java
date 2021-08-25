@@ -1,4 +1,16 @@
 # geekbang-java stage 1 submit logs
+v2.3 第8周作业
+1.利用 Reactor Mono API 配合 Reactive Streams Publisher 实现，让 Subscriber 实现能够获取到数据，可以参考以下代码：  
+    SimplePublisher();  
+    Mono.from(publisher).subscribe(new BusinessSubscriber(5));  
+    for (int i = 0; i < 5; i++) {  
+      publisher.publish(i);  
+    }  
+  答：答案见my-reactive-messaging模块中org.geektimes.reactive.streams.SimplePublisher，抄群友作业。  
+  经调试发现，直接使用from()实际订阅的是reactor.core.publisher.MonoNext.NextSubscriber，其onNext方法执行一次即将complete标志改为true，后面不会调用BusinessSubscriber的onNext方法打印数字；  
+  而使用fromDirect()实际订阅的是reactor.core.publisher.StrictSubscriber，该代理类会实际调用BusinessSubscriber的onNext方法打印数字。
+
+
 v2.2 第7周作业
 1.描述 Spring 校验注解org.springframework.validation.annotation.Validated 的⼯作原理，它与 Spring Validator 以及 JSR-303 Bean Validation @javax.validation.Valid 之间的关系    
   答：工作原理：@Validated支持支持类型、方法、参数级校验。方法参数级别的通过调用SpringMVC中org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument里的  
