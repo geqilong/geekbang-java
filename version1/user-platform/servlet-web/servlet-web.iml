@@ -10,20 +10,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.geekbang.projects:my-commons:v2-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="module" module-name="my-gateway" />
     <orderEntry type="module" module-name="my-configuration" />
+    <orderEntry type="module" module-name="my-commons" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:2.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="module" module-name="my-rest-client" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.rest.client:microprofile-rest-client-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api:3.0" level="project" />
-    <orderEntry type="module" module-name="my-commons" />
     <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project" />
-    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.7" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.5" level="project" />
@@ -32,5 +33,120 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest:2.2" level="project" />
+  </component>
+  <component name="WebModuleBuildComponent">
+    <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/servlet-web" />
+  </component>
+  <component name="WebModuleProperties">
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/junit-4.13.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/junit/junit/4.13/junit-4.13.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/hamcrest-core-2.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/hamcrest-2.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="0" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.servlet-api-3.1.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-gateway">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-gateway-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="module" name="my-configuration">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-configuration-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="module" name="my-commons">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-commons-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.annotation-api-1.3.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-io-2.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.7/commons-io-2.7.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/microprofile-config-api-2.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/eclipse/microprofile/config/microprofile-config-api/2.0/microprofile-config-api-2.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.inject-1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1.jar!/</url>
+    </containerElement>
+    <containerElement type="module" name="my-rest-client">
+      <attribute name="method" value="5" />
+      <attribute name="URI" value="/WEB-INF/lib/my-rest-client-v2-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/microprofile-rest-client-api-2.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/eclipse/microprofile/rest/client/microprofile-rest-client-api/2.0/microprofile-rest-client-api-2.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/microprofile-fault-tolerance-api-3.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/eclipse/microprofile/fault-tolerance/microprofile-fault-tolerance-api/3.0/microprofile-fault-tolerance-api-3.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/cdi-api-2.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/enterprise/cdi-api/2.0/cdi-api-2.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.el-api-3.0.0.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/javax.interceptor-api-1.2.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-lang-2.6.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.6/commons-lang-2.6.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jackson-core-2.9.5.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jackson-databind-2.9.5.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.9.5/jackson-databind-2.9.5.jar!/</url>
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jackson-annotations-2.9.5.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.9.5/jackson-annotations-2.9.5.jar!/</url>
+    </containerElement>
+    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+    <webroots>
+      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
+    </webroots>
   </component>
 </module>

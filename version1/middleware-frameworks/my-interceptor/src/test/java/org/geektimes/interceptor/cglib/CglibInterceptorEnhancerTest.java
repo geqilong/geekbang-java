@@ -16,13 +16,13 @@
  */
 package org.geektimes.interceptor.cglib;
 
-import org.geektimes.interceptor.AnnotatedInterceptor;
 import org.geektimes.interceptor.EchoService;
-import org.geektimes.interceptor.InterceptorEnhancer;
 import org.junit.Test;
 
+import static org.geektimes.interceptor.AnnotatedInterceptor.loadInterceptors;
+
 /**
- * {@link InterceptorEnhancer} Test
+ * {@link CglibInterceptorEnhancer} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
@@ -30,12 +30,11 @@ import org.junit.Test;
 public class CglibInterceptorEnhancerTest {
 
     @Test
-    public void testCglibEnhancer() {
-        InterceptorEnhancer enhancer = new CglibInterceptorEnhancer();
+    public void test() {
+        CglibInterceptorEnhancer enhancer = new CglibInterceptorEnhancer();
         EchoService echoService = new EchoService();
-        Object proxy = enhancer.enhance(echoService, AnnotatedInterceptor.loadInterceptors());
+        Object proxy = enhancer.enhance(echoService, loadInterceptors());
         EchoService echoServiceProxy = (EchoService) proxy;
         echoServiceProxy.echo("Hello,World");
     }
-
 }

@@ -31,6 +31,7 @@ import static java.lang.String.format;
  */
 @Bulkhead(value = 1)
 public class EchoService {
+
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Timeout

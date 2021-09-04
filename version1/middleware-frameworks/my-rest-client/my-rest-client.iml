@@ -164,9 +164,11 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: org.geekbang.projects:my-commons:v2-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.rest.client:microprofile-rest-client-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:2.0" level="project" />
     <orderEntry type="module" module-name="my-configuration" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api:3.0" level="project" />
     <orderEntry type="module" module-name="my-commons" />
     <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
@@ -174,7 +176,6 @@
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.interceptor:javax.interceptor-api:1.2" level="project" />
-    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.7" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.5" level="project" />

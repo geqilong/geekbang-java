@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.geektimes.commons.util.AnnotationUtils.findAnnotation;
+import static org.geektimes.commons.lang.util.AnnotationUtils.findAnnotation;
 
 /**
  * The utilities class for Java Cache {@link Annotation}

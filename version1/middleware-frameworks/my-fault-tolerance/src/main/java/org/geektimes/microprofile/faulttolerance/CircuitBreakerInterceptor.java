@@ -1,5 +1,20 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.geektimes.microprofile.faulttolerance;
-
 
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.exceptions.CircuitBreakerOpenException;
@@ -17,8 +32,11 @@ import java.util.concurrent.atomic.LongAdder;
 import static org.geektimes.commons.reflect.util.ClassUtils.isDerived;
 
 /**
- * * The interceptor implementation for the annotation {@link CircuitBreaker} of
- * * MicroProfile Fault Tolerance
+ * The interceptor implementation for the annotation {@link CircuitBreaker} of
+ * MicroProfile Fault Tolerance
+ *
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @since 1.0.0
  */
 @CircuitBreaker
 @Interceptor
@@ -32,7 +50,7 @@ public class CircuitBreakerInterceptor extends AnnotatedInterceptor<CircuitBreak
     }
 
     @Override
-    protected Object execute(InvocationContext context, CircuitBreaker circuitBreaker) throws Throwable {
+    protected Object intercept(InvocationContext context, CircuitBreaker circuitBreaker) throws Throwable {
         CountableSlidingWindow slidingWindow = getSlidingWindow(circuitBreaker);
         if (slidingWindow.isOpen()) {
             throw new CircuitBreakerOpenException(slidingWindow.toString());
@@ -52,7 +70,8 @@ public class CircuitBreakerInterceptor extends AnnotatedInterceptor<CircuitBreak
     }
 
     CountableSlidingWindow getSlidingWindow(CircuitBreaker circuitBreaker) {
-        return slidingWindowsCache.computeIfAbsent(circuitBreaker, key -> new CountableSlidingWindow(key));
+        return slidingWindowsCache.computeIfAbsent(circuitBreaker, key -> new CountableSlidingWindow(key))
+                .calculateStatus();
     }
 
     static class CountableSlidingWindow {
@@ -111,14 +130,12 @@ public class CircuitBreakerInterceptor extends AnnotatedInterceptor<CircuitBreak
                 successTrials.increment();
             }
             requests.increment();
-            calculateStatus();
             return this;
         }
 
         private CountableSlidingWindow failure(Throwable failure) {
             if (isOnFailure(failure)) {
                 failures.increment();
-                calculateStatus();
             }
             requests.increment();
             return this;
@@ -129,7 +146,7 @@ public class CircuitBreakerInterceptor extends AnnotatedInterceptor<CircuitBreak
             return isDerived(failureClass, appliedFailures) && !isDerived(failureClass, ignoredFailures);
         }
 
-        private void calculateStatus() {
+        private CountableSlidingWindow calculateStatus() {
             if (isClosed()) {
 
                 // Status : CLOSED -> OPEN
@@ -163,6 +180,8 @@ public class CircuitBreakerInterceptor extends AnnotatedInterceptor<CircuitBreak
                 }
 
             }
+
+            return this;
         }
 
         boolean shouldOpen() {

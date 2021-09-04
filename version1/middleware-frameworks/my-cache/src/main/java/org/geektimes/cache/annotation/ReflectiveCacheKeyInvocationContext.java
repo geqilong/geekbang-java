@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.geektimes.commons.util.AnnotationUtils.contains;
+import static org.geektimes.commons.lang.util.AnnotationUtils.contains;
 
 /**
  * {@link CacheKeyInvocationContext} based on reflection

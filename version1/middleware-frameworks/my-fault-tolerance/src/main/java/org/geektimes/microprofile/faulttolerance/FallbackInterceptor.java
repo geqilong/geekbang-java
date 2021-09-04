@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.geektimes.microprofile.faulttolerance;
 
 import org.eclipse.microprofile.faulttolerance.ExecutionContext;
@@ -17,6 +33,9 @@ import static org.geektimes.commons.reflect.util.ClassUtils.isDerived;
 /**
  * The interceptor implementation for the annotation {@link Fallback} of
  * MicroProfile Fault Tolerance
+ *
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @since 1.0.0
  */
 @Interceptor
 public class FallbackInterceptor extends AnnotatedInterceptor<Fallback> {
@@ -27,12 +46,13 @@ public class FallbackInterceptor extends AnnotatedInterceptor<Fallback> {
     }
 
     @Override
-    protected Object execute(InvocationContext context, Fallback fallback) throws Throwable {
+    protected Object intercept(InvocationContext context, Fallback fallback) throws Throwable {
         Object result = null;
         try {
             result = context.proceed();
         } catch (Throwable e) {
             Throwable failure = getFailure(e);
+
             if (!isApplyOn(fallback, failure) || isSkipOn(fallback, failure)) {
                 throw failure;
             }
@@ -41,9 +61,8 @@ public class FallbackInterceptor extends AnnotatedInterceptor<Fallback> {
         return result;
     }
 
-    private Object handleFallback(InvocationContext context, Fallback fallback, Throwable failure)
-            throws Exception {
-        Object result;
+    private Object handleFallback(InvocationContext context, Fallback fallback, Throwable e) throws Exception {
+        Object result = null;
         String methodName = fallback.fallbackMethod();
         if (!"".equals(methodName)) {
             Method fallbackMethod = findFallbackMethod(context, methodName);
@@ -51,7 +70,7 @@ public class FallbackInterceptor extends AnnotatedInterceptor<Fallback> {
         } else {
             Class<? extends FallbackHandler<?>> fallbackHandlerType = fallback.value();
             FallbackHandler fallbackHandler = fallbackHandlerType.newInstance();
-            result = fallbackHandler.handle(new ExecutionContextAdapter(context, failure));
+            result = fallbackHandler.handle(new ExecutionContextAdapter(context, e));
         }
         return result;
     }
@@ -75,21 +94,24 @@ public class FallbackInterceptor extends AnnotatedInterceptor<Fallback> {
         return fallbackMethod;
     }
 
-    private boolean isSkipOn(Fallback fallback, Throwable failure) {
-        return isDerived(failure.getClass(), fallback.skipOn());
+
+    private boolean isApplyOn(Fallback fallback, Throwable e) {
+        return isDerived(e.getClass(), fallback.applyOn());
     }
 
-    private boolean isApplyOn(Fallback fallback, Throwable failure) {
-        return isDerived(failure.getClass(), fallback.applyOn());
+    private boolean isSkipOn(Fallback fallback, Throwable e) {
+        return isDerived(e.getClass(), fallback.skipOn());
     }
 
     private static class ExecutionContextAdapter implements ExecutionContext {
+
         private final InvocationContext context;
+
         private final Throwable e;
 
-        public ExecutionContextAdapter(InvocationContext context, Throwable failure) {
+        private ExecutionContextAdapter(InvocationContext context, Throwable e) {
             this.context = context;
-            this.e = failure;
+            this.e = e;
         }
 
         @Override

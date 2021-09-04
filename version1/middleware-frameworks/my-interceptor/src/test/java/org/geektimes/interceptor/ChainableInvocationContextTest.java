@@ -36,7 +36,9 @@ public class ChainableInvocationContextTest {
         Method method = EchoService.class.getMethod("echo", String.class);
         ReflectiveMethodInvocationContext delegateContext = new ReflectiveMethodInvocationContext
                 (echoService, method, "Hello,World");
+
         ChainableInvocationContext context = new ChainableInvocationContext(delegateContext, loadInterceptors());
+
         context.proceed();
 
     }

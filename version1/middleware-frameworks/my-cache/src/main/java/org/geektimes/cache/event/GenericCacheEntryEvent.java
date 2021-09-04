@@ -43,9 +43,9 @@ public class GenericCacheEntryEvent<K, V> extends CacheEntryEvent<K, V> {
      *
      * @param source    the cache that originated the event
      * @param eventType the event type for this event
-     * @param key       the key of {@link javax.cache.Cache.Entry}
-     * @param oldValue  the old value of {@link javax.cache.Cache.Entry}
-     * @param value     the current value of {@link javax.cache.Cache.Entry}
+     * @param key       the key of {@link Cache.Entry}
+     * @param oldValue  the old value of {@link Cache.Entry}
+     * @param value     the current value of {@link Cache.Entry}
      */
     public GenericCacheEntryEvent(Cache source, EventType eventType, K key, V oldValue, V value) {
         super(source, eventType);

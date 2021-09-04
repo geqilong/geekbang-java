@@ -41,6 +41,12 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.geekbang.projects</groupId>
+            <artifactId>my-commons</artifactId>
+            <version>v2-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
