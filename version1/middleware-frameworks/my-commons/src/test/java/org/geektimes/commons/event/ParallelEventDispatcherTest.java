@@ -19,6 +19,7 @@ package org.geektimes.commons.event;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.concurrent.Executors;
 
 import static java.util.concurrent.Executors.newSingleThreadExecutor;
 

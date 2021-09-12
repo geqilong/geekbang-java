@@ -16,6 +16,8 @@
  */
 package org.geektimes.commons.util;
 
+import org.geektimes.commons.lang.util.StringUtils;
+
 import java.util.Comparator;
 
 import static org.geektimes.commons.constants.Constants.DOT;

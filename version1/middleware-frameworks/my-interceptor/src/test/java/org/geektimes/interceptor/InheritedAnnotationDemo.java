@@ -16,23 +16,28 @@
  */
 package org.geektimes.interceptor;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
- * {@link InterceptorRegistry}
+ * TODO Comment
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0.0
+ * @since TODO
  */
-public class InterceptorRegistryTest {
+public class InheritedAnnotationDemo {
 
-    @Test
-    public void test() {
-        InterceptorRegistry registry = InterceptorRegistry.getInstance();
-        for (int i = 0; i < 99; i++) {
-            assertEquals(registry, InterceptorRegistry.getInstance());
-        }
+    public static void main(String[] args) {
+        Logging logging = A.class.getAnnotation(Logging.class);
+        System.out.println(logging);
+
+        logging = B.class.getAnnotation(Logging.class);
+        System.out.println(logging);
     }
+}
+
+@Logging(name = "A")
+class A { // Super Class
+
+}
+
+class B extends A { // B is A
+
 }

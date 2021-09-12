@@ -13,40 +13,41 @@
     <artifactId>my-interceptor</artifactId>
     <name>Middleware Frameworks - My Interceptor Framework</name>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
     <dependencies>
-        <!--Internal Projects-->
+
+        <!-- Internal Artifacts -->
         <dependency>
             <groupId>org.geekbang.projects</groupId>
             <artifactId>my-commons</artifactId>
             <version>${revision}</version>
         </dependency>
-        <!--Interceptor API-->
+
+        <!-- Interceptor API -->
         <dependency>
             <groupId>javax.interceptor</groupId>
             <artifactId>javax.interceptor-api</artifactId>
         </dependency>
-        <!--CGLIB-->
+
+        <!-- Java CDI API -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- CGLIB -->
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
         </dependency>
-        <!--Testing-->
+
+        <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.geekbang.projects</groupId>
-            <artifactId>my-commons</artifactId>
-            <version>v2-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+
     </dependencies>
 
 </project>

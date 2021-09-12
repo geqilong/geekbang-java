@@ -17,7 +17,6 @@
 package org.geektimes.commons.jndi.file;
 
 import org.apache.commons.io.FileUtils;
-import org.geektimes.commons.function.ThrowableAction;
 import org.geektimes.commons.io.Deserializer;
 import org.geektimes.commons.io.Deserializers;
 import org.geektimes.commons.io.Serializer;
@@ -29,6 +28,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import static org.apache.commons.io.FileUtils.readFileToByteArray;
+import static org.geektimes.commons.function.ThrowableAction.execute;
 import static org.geektimes.commons.function.ThrowableSupplier.execute;
 
 /**
@@ -129,7 +129,7 @@ class FileSystemContext implements Context {
         if (override && !targetFile.exists()) {
             return;
         }
-        ThrowableAction.execute(() -> {
+        execute(() -> {
             Class<?> objClass = obj.getClass();
             Serializer serializer = serializers.getMostCompatible(objClass);
             byte[] bytes = serializer.serialize(obj);

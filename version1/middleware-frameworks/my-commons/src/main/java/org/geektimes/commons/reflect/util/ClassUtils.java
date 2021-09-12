@@ -46,7 +46,8 @@ import static java.lang.reflect.Modifier.isInterface;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptySet;
 import static java.util.Collections.unmodifiableSet;
-import static org.geektimes.commons.collection.util.CollectionUtils.ofSet;
+import static org.geektimes.commons.collection.util.CollectionUtils.newLinkedHashSet;
+import static org.geektimes.commons.collection.util.CollectionUtils.asSet;
 import static org.geektimes.commons.function.Streams.filterAll;
 import static org.geektimes.commons.function.ThrowableFunction.execute;
 import static org.geektimes.commons.lang.util.ArrayUtils.isEmpty;
@@ -104,7 +105,7 @@ public abstract class ClassUtils {
      * @see javax.management.openmbean.SimpleType
      * @since 1.0.0
      */
-    public static final Set<Class<?>> SIMPLE_TYPES = ofSet(
+    public static final Set<Class<?>> SIMPLE_TYPES = asSet(
             Void.class,
             Boolean.class,
             Character.class,
@@ -448,7 +449,7 @@ public abstract class ClassUtils {
         }
 
         // Keep the same order from List
-        return ofSet(filterAll(allClasses, classFilters));
+        return CollectionUtils.asSet(filterAll(allClasses, classFilters));
     }
 
     /**
@@ -508,7 +509,7 @@ public abstract class ClassUtils {
         // FIFO -> FILO
         Collections.reverse(allInterfaces);
 
-        return ofSet(filterAll(allInterfaces, interfaceFilters));
+        return CollectionUtils.asSet(filterAll(allInterfaces, interfaceFilters));
     }
 
     /**

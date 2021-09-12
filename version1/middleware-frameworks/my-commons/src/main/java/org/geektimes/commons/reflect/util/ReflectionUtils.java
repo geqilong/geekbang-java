@@ -1,6 +1,7 @@
 package org.geektimes.commons.reflect.util;
 
 import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
@@ -10,7 +11,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.valueOf;
 import static org.geektimes.commons.reflect.util.ClassUtils.isSimpleType;
+import static org.geektimes.commons.reflect.util.MethodUtils.invokeMethod;
 
 
 /**

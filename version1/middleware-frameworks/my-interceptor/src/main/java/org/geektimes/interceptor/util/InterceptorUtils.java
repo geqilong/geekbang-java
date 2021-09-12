@@ -16,18 +16,24 @@
  */
 package org.geektimes.interceptor.util;
 
+import org.geektimes.commons.util.PriorityComparator;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.interceptor.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 
 import static java.lang.String.format;
 import static java.lang.reflect.Modifier.*;
 import static java.util.Objects.requireNonNull;
-import static org.geektimes.commons.lang.util.AnnotationUtils.findAnnotation;
+import static org.geektimes.commons.function.ThrowableSupplier.execute;
 import static org.geektimes.commons.lang.util.AnnotationUtils.isAnnotationPresent;
+import static org.geektimes.commons.lang.util.AnnotationUtils.isMetaAnnotation;
 import static org.geektimes.commons.reflect.util.ConstructorUtils.hasPublicNoArgConstructor;
 
 /**
@@ -43,12 +49,52 @@ public abstract class InterceptorUtils {
 
     public static boolean isInterceptorClass(Class<?> interceptorClass) {
         if (isAnnotationPresent(interceptorClass, INTERCEPTOR_ANNOTATION_TYPE)) {
-            validatorInterceptorClass(interceptorClass);
+            validateInterceptorClass(interceptorClass);
         }
         return false;
     }
 
+    public static List<Object> sortInterceptors(List<Object> interceptors) {
+        List<Object> sortedInterceptors = new LinkedList<>(interceptors);
+        sortedInterceptors.sort(PriorityComparator.INSTANCE);
+        return sortedInterceptors;
+    }
+
+    public static <T> T unwrap(Class<T> type) {
+        return execute(type::newInstance);
+    }
+
+    public static <A extends Annotation> A searchAnnotation(Executable executable, Class<A> annotationType) {
+        A annotation = executable.getAnnotation(annotationType);
+        if (annotation == null) {
+            annotation = searchAnnotation(executable.getDeclaringClass(), annotationType);
+        }
+        return annotation;
+    }
+
+    public static <A extends Annotation> A searchAnnotation(Class<?> componentClass, Class<A> annotationType) {
+        A annotation = null;
+        if (!componentClass.isInterface()) {
+            do {
+                annotation = componentClass.getAnnotation(annotationType);
+                componentClass = componentClass.getSuperclass();
+            } while (annotation == null && componentClass != null);
+        }
+        return annotation;
+    }
+
     /**
+     * Around-invoke methods may be declared in interceptor classes, in the superclasses of interceptor
+     * classes, in the target class, and/or in superclasses of the target class. However, only one around-invoke
+     * method may be declared in a given class.
+     * <p>
+     * Around-invoke methods can have public, private, protected, or package level access. An
+     * around-invoke method must not be declared as abstract, final or static.
+     * <p>
+     * Around-invoke methods have the following signature:
+     * <p>
+     * Object <METHOD>(InvocationContext)
+     *
      * @param method the target {@link Method method}
      * @return <code>true</code> if the given method that annotated {@link AroundInvoke} is any non-final,
      * non-static method with a single parameter of type {@link InvocationContext} and return type {@link Object},
@@ -63,6 +109,13 @@ public abstract class InterceptorUtils {
     }
 
     /**
+     * Around-timeout methods can have public, private, protected, or package level access. An
+     * around-timeout method must not be declared as abstract, final or static.
+     * <p>
+     * Around-timeout methods have the following signature:
+     * <p>
+     * Object <METHOD>(InvocationContext)
+     *
      * @param method the target {@link Method method}
      * @return <code>true</code> if the given method that annotated {@link AroundTimeout} is any non-final,
      * non-static method with a single parameter of type {@link InvocationContext} and return type {@link Object},
@@ -123,24 +176,15 @@ public abstract class InterceptorUtils {
         if (method == null) {
             return null;
         }
-        A annotation = findAnnotation(method, interceptorBindingType);
-        if (annotation == null) {
-            annotation = findAnnotation(method.getDeclaringClass(), interceptorBindingType);
-        }
-        return annotation;
+        return searchAnnotation(method, interceptorBindingType);
     }
 
     public static <A extends Annotation> A resolveInterceptorBinding(Constructor constructor, Class<A> interceptorBindingType) {
         if (constructor == null) {
             return null;
         }
-        A annotation = findAnnotation(constructor, interceptorBindingType);
-        if (annotation == null) {
-            annotation = findAnnotation(constructor.getDeclaringClass(), interceptorBindingType);
-        }
-        return annotation;
+        return searchAnnotation(constructor, interceptorBindingType);
     }
-
 
     static boolean isInterceptionMethod(Method method, Class<? extends Annotation> annotationType,
                                         Class<?> validReturnType) {
@@ -203,7 +247,7 @@ public abstract class InterceptorUtils {
      * @throws IllegalStateException If an interceptor class does not annotate @Interceptor or
      *                               is abstract or have not a public no-arg constructor
      */
-    public static void validatorInterceptorClass(Class<?> interceptorClass) throws NullPointerException, IllegalStateException {
+    public static void validateInterceptorClass(Class<?> interceptorClass) throws NullPointerException, IllegalStateException {
         requireNonNull(interceptorClass, "The argument 'interceptorClass' must not be null!");
         if (!interceptorClass.isAnnotationPresent(INTERCEPTOR_ANNOTATION_TYPE)) {
             throw new IllegalStateException(format("The Interceptor class[%s] must annotate %s",
@@ -238,7 +282,7 @@ public abstract class InterceptorUtils {
     }
 
     public static boolean isInterceptorBinding(Class<? extends Annotation> annotationType) {
-        return isAnnotationPresent(annotationType, InterceptorBinding.class);
+        return isMetaAnnotation(annotationType, InterceptorBinding.class);
     }
 
     private static IllegalStateException newIllegalStateException(String messagePattern, Object... args) {

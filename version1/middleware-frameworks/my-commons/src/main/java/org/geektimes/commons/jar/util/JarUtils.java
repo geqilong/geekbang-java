@@ -21,6 +21,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import static java.util.Collections.list;
+import static org.geektimes.commons.collection.util.CollectionUtils.newLinkedList;
 
 /**
  * Jar Utility class

@@ -14,24 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.geektimes.interceptor.jdk;
-
-import org.geektimes.interceptor.InterceptorEnhancer;
-
-import static java.lang.reflect.Proxy.newProxyInstance;
-import static org.geektimes.commons.lang.util.ClassLoaderUtils.getClassLoader;
+package org.geektimes.enterprise.inject.standard.beans;
 
 /**
- * {@link InterceptorEnhancer} based on JDK Dynamic Proxy
+ * The source enumeration for Bean type
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public class DynamicProxyInterceptorEnhancer implements InterceptorEnhancer {
+public enum BeanTypeSource {
 
-    @Override
-    public <T> T enhance(T source, Class<? super T> type, Object... interceptors) {
-        ClassLoader classLoader = getClassLoader(type);
-        return (T) newProxyInstance(classLoader, new Class[]{type}, new InvocationHandlerAdapter(source, interceptors));
-    }
+    /**
+     * The enabled bean type from explicit bean archives.
+     */
+    ENABLED,
+
+    /**
+     * The discovered bean type from implicit bean archives.
+     */
+    DISCOVERED,
+
+
+    /**
+     * The synthetic bean type outside of bean archives.
+     */
+    SYNTHETIC;
+
 }

@@ -16,28 +16,25 @@
  */
 package org.geektimes.interceptor;
 
-import static org.geektimes.commons.util.ServiceLoaders.loadAsArray;
+import org.geektimes.interceptor.Logging;
+import org.geektimes.interceptor.LoggingInterceptor;
+
+import javax.annotation.PostConstruct;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+import java.util.logging.Logger;
 
 /**
- * {@link Interceptor} Enhancer
- *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0.0
+ * @since
  */
-public interface InterceptorEnhancer {
+@Logging
+@Interceptor
+public class ExtLoggingInterceptor extends LoggingInterceptor {
 
-    default <T> T enhance(T source) {
-        return enhance(source, (Class<? super T>) source.getClass());
+    @PostConstruct
+    public void postConstruct(InvocationContext context) throws Exception {
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.info("postConstruct");
     }
-
-    default <T> T enhance(T source, Class<? super T> type) {
-        return enhance(source, type, loadAsArray(AnnotatedInterceptor.class));
-    }
-
-    default <T> T enhance(T source, Object... interceptors) {
-        return enhance(source, (Class<? super T>) source.getClass(), interceptors);
-    }
-
-    <T> T enhance(T source, Class<? super T> type, Object... interceptors);
-
 }

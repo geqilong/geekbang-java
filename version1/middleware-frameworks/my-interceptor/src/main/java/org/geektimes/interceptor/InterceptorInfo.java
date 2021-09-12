@@ -25,18 +25,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.AroundTimeout;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static java.lang.String.format;
-import static java.util.Collections.unmodifiableSet;
-import static org.geektimes.commons.collection.util.CollectionUtils.ofSet;
 import static org.geektimes.commons.lang.util.AnnotationUtils.getAllDeclaredAnnotations;
-import static org.geektimes.commons.reflect.util.MethodUtils.getAllDeclaredMethods;
-import static org.geektimes.interceptor.util.InterceptorUtils.validatorInterceptorClass;
+import static org.geektimes.commons.reflect.util.ClassUtils.getAllClasses;
+import static org.geektimes.interceptor.util.InterceptorUtils.validateInterceptorClass;
 
 /**
  * Interceptor Info Metadata class
@@ -46,113 +42,144 @@ import static org.geektimes.interceptor.util.InterceptorUtils.validatorIntercept
  */
 public class InterceptorInfo {
 
-    private final InterceptorRegistry interceptorRegistry;
+    private final InterceptorManager interceptorManager;
 
     private final Class<?> interceptorClass;
 
-    private final Method aroundInvokeMethod;
+    /**
+     * If an interceptor class declared using interceptor bindings has superclasses,
+     * interceptor methods declared in the interceptor class’s superclasses are
+     * invoked before the interceptor method declared in the interceptor class itself,
+     * most general superclass first.
+     */
+    private final Collection<Method> aroundInvokeMethods;
 
-    private final Method aroundTimeoutMethod;
+    private final Collection<Method> aroundTimeoutMethods;
 
-    private final Method aroundConstructMethod;
+    private final Collection<Method> aroundConstructMethods;
 
-    private final Method postConstructMethod;
+    private final Collection<Method> postConstructMethods;
 
-    private final Method preDestroyMethod;
+    private final Collection<Method> preDestroyMethods;
 
-    private final Set<Annotation> interceptorBindings;
-
-    private final Set<Class<? extends Annotation>> interceptorBindingTypes;
-
+    private final InterceptorBindings interceptorBindings;
 
     public InterceptorInfo(Class<?> interceptorClass) {
-        validatorInterceptorClass(interceptorClass);
-        this.interceptorRegistry = InterceptorRegistry.getInstance(interceptorClass.getClassLoader());
+        this.interceptorManager = InterceptorManager.getInstance(interceptorClass.getClassLoader());
         this.interceptorClass = interceptorClass;
-        Map<Class<? extends Annotation>, Method> interceptionMethods = resolveInterceptionMethods();
-        this.aroundInvokeMethod = interceptionMethods.remove(AroundInvoke.class);
-        this.aroundTimeoutMethod = interceptionMethods.remove(AroundTimeout.class);
-        this.aroundConstructMethod = interceptionMethods.remove(AroundConstruct.class);
-        this.postConstructMethod = interceptionMethods.remove(PostConstruct.class);
-        this.preDestroyMethod = interceptionMethods.remove(PreDestroy.class);
+        this.aroundInvokeMethods = new LinkedList<>();
+        this.aroundTimeoutMethods = new LinkedList<>();
+        this.aroundConstructMethods = new LinkedList<>();
+        this.postConstructMethods = new LinkedList<>();
+        this.preDestroyMethods = new LinkedList<>();
+        resolveInterceptionMethods();
         this.interceptorBindings = resolveInterceptorBindings();
-        this.interceptorBindingTypes = resolveInterceptorBindingTypes();
     }
 
-    private Map<Class<? extends Annotation>, Method> resolveInterceptionMethods() throws IllegalStateException {
-        Set<Method> methods = getAllDeclaredMethods(interceptorClass, method -> !Object.class.equals(method.getDeclaringClass()));
-        Map<Class<? extends Annotation>, Method> interceptionMethods = new HashMap<>();
+    private void resolveInterceptionMethods() throws IllegalStateException {
+        Set<Class<?>> allClasses = getAllClasses(interceptorClass, true, t -> !Object.class.equals(t));
 
-        for (Method method : methods) {
-            resolveInterceptionMethod(method, AroundInvoke.class, InterceptorUtils::isAroundInvokeMethod, interceptionMethods);
-            resolveInterceptionMethod(method, AroundTimeout.class, InterceptorUtils::isAroundTimeoutMethod, interceptionMethods);
-            resolveInterceptionMethod(method, AroundConstruct.class, InterceptorUtils::isAroundConstructMethod, interceptionMethods);
-            resolveInterceptionMethod(method, PostConstruct.class, InterceptorUtils::isPostConstructMethod, interceptionMethods);
-            resolveInterceptionMethod(method, PreDestroy.class, InterceptorUtils::isPreDestroyMethod, interceptionMethods);
+        for (Class<?> declaringClass : allClasses) {
+            Map<Class<? extends Annotation>, Method> interceptionMethods = new HashMap<>();
+            for (Method method : declaringClass.getDeclaredMethods()) {
+                resolveInterceptionMethod(method, AroundInvoke.class, InterceptorUtils::isAroundInvokeMethod,
+                        interceptionMethods, aroundInvokeMethods::add);
+
+                resolveInterceptionMethod(method, AroundTimeout.class, InterceptorUtils::isAroundTimeoutMethod,
+                        interceptionMethods, aroundTimeoutMethods::add);
+
+                resolveInterceptionMethod(method, AroundConstruct.class, InterceptorUtils::isAroundConstructMethod,
+                        interceptionMethods, aroundConstructMethods::add);
+
+                resolveInterceptionMethod(method, PostConstruct.class, InterceptorUtils::isPostConstructMethod,
+                        interceptionMethods, postConstructMethods::add);
+
+                resolveInterceptionMethod(method, PreDestroy.class, InterceptorUtils::isPreDestroyMethod,
+                        interceptionMethods, preDestroyMethods::add);
+            }
+            interceptionMethods.clear();
         }
 
-        return interceptionMethods;
     }
 
-    private void resolveInterceptionMethod(Method method, Class<? extends Annotation> annotationType,
+    private void resolveInterceptionMethod(Method method,
+                                           Class<? extends Annotation> annotationType,
                                            Predicate<Method> isInterceptionMethod,
-                                           Map<Class<? extends Annotation>, Method> interceptionMethods) {
+                                           Map<Class<? extends Annotation>, Method> interceptionMethods,
+                                           Consumer<Method> interceptionMethodConsumer) {
         if (isInterceptionMethod.test(method)) {
-            if (interceptionMethods.putIfAbsent(annotationType, method) != null) {
-                throw interceptionMethodDefinitionException(annotationType);
+            if (interceptionMethods.putIfAbsent(annotationType, method) == null) {
+                interceptionMethodConsumer.accept(method);
+            } else {
+                throw interceptionMethodDefinitionException(method, annotationType);
             }
         }
     }
 
-    private IllegalStateException interceptionMethodDefinitionException(Class<? extends Annotation> annotationType) {
-        throw new IllegalStateException(format("There is only one @%s method is declared in the interceptor class[%s]",
-                annotationType.getName(), interceptorClass.getName()));
+    private IllegalStateException interceptionMethodDefinitionException(Method method, Class<? extends Annotation> annotationType) {
+        throw new IllegalStateException(format("There is only one @%s method[%s] is declared in the interceptor class[%s]",
+                annotationType.getName(), method.toString(), method.getDeclaringClass().getName()));
     }
 
-    private Set<Annotation> resolveInterceptorBindings() {
-        return ofSet(getAllDeclaredAnnotations(interceptorClass, interceptorRegistry::isInterceptorBinding));
+    private InterceptorBindings resolveInterceptorBindings() {
+        return new InterceptorBindings(getAllDeclaredAnnotations(interceptorClass, interceptorManager::isInterceptorBinding));
     }
 
-    private Set<Class<? extends Annotation>> resolveInterceptorBindingTypes() {
-        return unmodifiableSet(interceptorBindings.stream()
-                .map(Annotation::annotationType)
-                .collect(Collectors.toSet()));
+    Collection<Method> getAroundInvokeMethods() {
+        return aroundInvokeMethods;
+    }
+
+    Collection<Method> getAroundTimeoutMethods() {
+        return aroundTimeoutMethods;
+    }
+
+    Collection<Method> getAroundConstructMethods() {
+        return aroundConstructMethods;
+    }
+
+    Collection<Method> getPostConstructMethods() {
+        return postConstructMethods;
+    }
+
+    Collection<Method> getPreDestroyMethods() {
+        return preDestroyMethods;
     }
 
     public Class<?> getInterceptorClass() {
         return interceptorClass;
     }
 
-    public Method getAroundInvokeMethod() {
-        return aroundInvokeMethod;
+    public boolean hasAroundInvokeMethod() {
+        return !getAroundInvokeMethods().isEmpty();
     }
 
-    public Method getAroundTimeoutMethod() {
-        return aroundTimeoutMethod;
+    public boolean hasAroundTimeoutMethod(){
+        return !getAroundTimeoutMethods().isEmpty();
     }
 
-    public Method getAroundConstructMethod() {
-        return aroundConstructMethod;
+    public boolean hasAroundConstructMethod(){
+        return !getAroundConstructMethods().isEmpty();
     }
 
-    public Method getPostConstructMethod() {
-        return postConstructMethod;
+    public boolean hasPostConstructMethod(){
+        return !getPostConstructMethods().isEmpty();
     }
 
-    public Method getPreDestroyMethod() {
-        return preDestroyMethod;
+    public boolean hasPreDestroyMethod(){
+        return !getPreDestroyMethods().isEmpty();
     }
 
-    public Set<Annotation> getInterceptorBindings() {
+
+    public InterceptorBindings getInterceptorBindings() {
         return interceptorBindings;
     }
 
     public Set<Class<? extends Annotation>> getInterceptorBindingTypes() {
-        return interceptorBindingTypes;
+        return interceptorBindings.getInterceptorBindingTypes();
     }
 
-    public InterceptorRegistry getInterceptorRegistry() {
-        return interceptorRegistry;
+    public InterceptorManager getInterceptorRegistry() {
+        return interceptorManager;
     }
 
 }
