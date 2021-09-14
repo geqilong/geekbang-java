@@ -1,4 +1,15 @@
 # geekbang-java stage 1 submit logs
+v2.4 第11周作业
+1.利用 Spring Boot 自动装配特性，编写一个自定义 Starter，  
+  规则如下：  
+  利用 @EnableAutoConfiguration 加载一个自定义 Confugration 类  
+    Configuration 类装配条件需要它非 Web 应用  
+    WebApplicationType = NONE  
+    Configuration 类中存在一个 @Bean 返回一个输出 HelloWorld ApplicationRunner 对象  
+答：见my-configuration模块test中，pom.xml中引入spring-boot-autoconfigure，包org.geektimes.configuration.autoconf中为启动类和配置类，  
+   在META-INF下创建spring.factories文件并配置org.springframework.boot.autoconfigure.EnableAutoConfiguration属性。
+
+
 v2.3 第8周作业
 1.利用 Reactor Mono API 配合 Reactive Streams Publisher 实现，让 Subscriber 实现能够获取到数据，可以参考以下代码：  
     SimplePublisher();  
