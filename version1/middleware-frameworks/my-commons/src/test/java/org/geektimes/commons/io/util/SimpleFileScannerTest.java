@@ -3,6 +3,7 @@
  */
 package org.geektimes.commons.io.util;
 
+import junit.framework.Assert;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.junit.Test;

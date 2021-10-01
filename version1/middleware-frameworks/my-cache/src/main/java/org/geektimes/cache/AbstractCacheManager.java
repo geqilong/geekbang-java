@@ -72,6 +72,7 @@ public abstract class AbstractCacheManager implements CacheManager {
     private ConcurrentMap<String, Cache> cacheRepository = new ConcurrentHashMap<>();
 
 
+
     public AbstractCacheManager(CachingProvider cachingProvider, URI uri, ClassLoader classLoader, Properties properties) {
         this.cachingProvider = cachingProvider;
         this.uri = uri == null ? cachingProvider.getDefaultURI() : uri;

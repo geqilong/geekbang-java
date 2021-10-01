@@ -16,9 +16,9 @@
  */
 package org.geektimes.enterprise.inject.standard.event;
 
-import org.geektimes.enterprise.inject.standard.ReflectiveAnnotatedMethod;
-import org.geektimes.enterprise.inject.standard.ReflectiveObserverMethod;
-import org.geektimes.enterprise.inject.standard.beans.StandardBeanManager;
+import org.geektimes.enterprise.inject.standard.annotation.ReflectiveAnnotatedMethod;
+import org.geektimes.enterprise.inject.standard.beans.manager.StandardBeanManager;
+import org.geektimes.enterprise.inject.standard.observer.ReflectiveObserverMethod;
 
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.ObserverMethod;
@@ -58,7 +58,7 @@ public class ProcessObserverMethodEvent<T, X> implements ProcessObserverMethod<T
 
     @Override
     public void addDefinitionError(Throwable t) {
-        standardBeanManager.addBeanDiscoveryDefinitionError(t);
+        standardBeanManager.addDefinitionError(t);
     }
 
     @Override

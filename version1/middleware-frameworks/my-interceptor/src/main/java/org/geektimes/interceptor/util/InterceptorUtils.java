@@ -34,7 +34,7 @@ import static java.util.Objects.requireNonNull;
 import static org.geektimes.commons.function.ThrowableSupplier.execute;
 import static org.geektimes.commons.lang.util.AnnotationUtils.isAnnotationPresent;
 import static org.geektimes.commons.lang.util.AnnotationUtils.isMetaAnnotation;
-import static org.geektimes.commons.reflect.util.ConstructorUtils.hasPublicNoArgConstructor;
+import static org.geektimes.commons.reflect.util.ConstructorUtils.hasNonPrivateConstructorWithoutParameters;
 
 /**
  * The utilities class for {@link Interceptor}
@@ -54,7 +54,7 @@ public abstract class InterceptorUtils {
         return false;
     }
 
-    public static List<Object> sortInterceptors(List<Object> interceptors) {
+    public static List<Object> sortInterceptors(List<?> interceptors) {
         List<Object> sortedInterceptors = new LinkedList<>(interceptors);
         sortedInterceptors.sort(PriorityComparator.INSTANCE);
         return sortedInterceptors;
@@ -272,7 +272,7 @@ public abstract class InterceptorUtils {
     }
 
     private static void validateInterceptorClassConstructors(Class<?> interceptorClass) {
-        if (!hasPublicNoArgConstructor(interceptorClass)) {
+        if (!hasNonPrivateConstructorWithoutParameters(interceptorClass)) {
             throw newIllegalStateException("The Interceptor class[%s] must have a public no-arg constructor!",
                     interceptorClass.getName());
         }
@@ -281,8 +281,13 @@ public abstract class InterceptorUtils {
     private static void validateInterceptorClassMethods(Class<?> interceptorClass) {
     }
 
-    public static boolean isInterceptorBinding(Class<? extends Annotation> annotationType) {
+    public static boolean isAnnotatedInterceptorBinding(Class<? extends Annotation> annotationType) {
         return isMetaAnnotation(annotationType, InterceptorBinding.class);
+    }
+
+    public static boolean isAnnotatedInterceptorBinding(Executable executable,
+                                                        Class<? extends Annotation> interceptorBindingType) {
+        return searchAnnotation(executable, interceptorBindingType) != null;
     }
 
     private static IllegalStateException newIllegalStateException(String messagePattern, Object... args) {

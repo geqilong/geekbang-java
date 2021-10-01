@@ -36,8 +36,8 @@ public class PriorityComparatorTest {
         assertEquals(0, PriorityComparator.compare(A.class, B.class));
         assertEquals(0, PriorityComparator.compare(A.class, D.class));
         assertEquals(-1, PriorityComparator.compare(A.class, C.class));
-        assertEquals(-1, PriorityComparator.compare(D.class, getClass()));
-        assertEquals(1, PriorityComparator.compare(getClass(), C.class));
+        assertEquals(1, PriorityComparator.compare(D.class, getClass()));
+        assertEquals(-1, PriorityComparator.compare(getClass(), C.class));
     }
 
     @Priority(100)

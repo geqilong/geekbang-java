@@ -19,10 +19,8 @@ package org.geektimes.commons.sql;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -70,7 +68,7 @@ public class JdbcExecutorTest {
         return dataSource;
     }
 
-    @Test
+   /* @Test
     public void testTableExists() {
         assertTrue(jdbcExecutor.tableExists("users"));
     }
@@ -109,7 +107,7 @@ public class JdbcExecutorTest {
         assertTrue(jdbcExecutor.executeUpdate(DELETE_ALL_USERS_DML_SQL) > 0);
 
     }
-
+*/
     @After
     public void destroy() throws SQLException {
         if (dataSource != null) {

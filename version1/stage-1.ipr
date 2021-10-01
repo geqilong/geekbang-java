@@ -123,6 +123,7 @@ under the License.
       <module filepath="$PROJECT_DIR$/shopizer/sm-core/sm-core.iml"/>
       <module filepath="$PROJECT_DIR$/shopizer/sm-shop-model/sm-shop-model.iml"/>
       <module filepath="$PROJECT_DIR$/shopizer/sm-shop/sm-shop.iml"/>
+      <module filepath="$PROJECT_DIR$/shopizer/sc-sm-shop/sc-sm-shop.iml"/>
       <module filepath="$PROJECT_DIR$/shopizer/shopizer.iml"/>
     </modules> 
   </component>  

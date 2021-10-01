@@ -24,12 +24,12 @@
     <orderEntry type="library" name="Maven: javax.cache:cache-api:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:2.0" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.7" level="project" />
     <orderEntry type="library" name="Maven: redis.clients:jedis:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.9.0" level="project" />
@@ -55,9 +55,9 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-juli:8.5.64" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-tribes:8.5.64" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-catalina:8.5.64" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-jsp-api:9.0.45" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-el-api:9.0.45" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.45" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-jsp-api:9.0.46" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-el-api:9.0.46" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.46" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-api:8.5.64" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-jaspic-api:8.5.64" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.tomcat:tomcat-util:8.5.64" level="project" />
@@ -72,6 +72,10 @@
     <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/user-web" />
   </component>
   <component name="WebModuleProperties">
+    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+    <webroots>
+      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
+    </webroots>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
       <attribute name="URI" value="/WEB-INF/lib/commons-validator-1.7.jar" />
@@ -189,33 +193,33 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-context-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.3.6/spring-context-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-context-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.3.7/spring-context-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-aop-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.3.6/spring-aop-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-aop-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.3.7/spring-aop-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-beans-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.3.6/spring-beans-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-beans-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.3.7/spring-beans-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-core-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.3.6/spring-core-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-core-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.3.7/spring-core-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-jcl-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.3.6/spring-jcl-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-jcl-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.3.7/spring-jcl-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/spring-expression-5.3.6.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-expression/5.3.6/spring-expression-5.3.6.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/spring-expression-5.3.7.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-expression/5.3.7/spring-expression-5.3.7.jar!/</url>
     </containerElement>
     <containerElement type="module" name="my-dependency-injection">
       <attribute name="method" value="5" />
@@ -312,18 +316,18 @@
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/tomcat-jsp-api-9.0.45.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jsp-api/9.0.45/tomcat-jsp-api-9.0.45.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-jsp-api-9.0.46.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jsp-api/9.0.46/tomcat-jsp-api-9.0.46.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/tomcat-el-api-9.0.45.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-el-api/9.0.45/tomcat-el-api-9.0.45.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-el-api-9.0.46.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-el-api/9.0.46/tomcat-el-api-9.0.46.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/tomcat-annotations-api-9.0.45.jar" />
-      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-annotations-api/9.0.45/tomcat-annotations-api-9.0.45.jar!/</url>
+      <attribute name="URI" value="/WEB-INF/lib/tomcat-annotations-api-9.0.46.jar" />
+      <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-annotations-api/9.0.46/tomcat-annotations-api-9.0.46.jar!/</url>
     </containerElement>
     <containerElement type="library" level="module">
       <attribute name="method" value="1" />
@@ -340,9 +344,5 @@
       <attribute name="URI" value="/WEB-INF/lib/tomcat-jaspic-api-8.5.64.jar" />
       <url>jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-jaspic-api/8.5.64/tomcat-jaspic-api-8.5.64.jar!/</url>
     </containerElement>
-    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
-    <webroots>
-      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
-    </webroots>
   </component>
 </module>

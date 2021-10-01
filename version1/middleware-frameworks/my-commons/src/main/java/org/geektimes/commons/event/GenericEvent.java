@@ -22,7 +22,7 @@ package org.geektimes.commons.event;
  * @param <S> the type of event source
  * @since 1.0.0
  */
-public class GenericEvent<S> extends Event {
+public class GenericEvent<S> extends org.geektimes.commons.event.Event {
 
     public GenericEvent(S source) {
         super(source);

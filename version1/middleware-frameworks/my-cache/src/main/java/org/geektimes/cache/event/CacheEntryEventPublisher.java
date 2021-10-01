@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The Publisher of {@link CacheEntryEvent}
+ * The Publisher of {@link javax.cache.event.CacheEntryEvent}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0

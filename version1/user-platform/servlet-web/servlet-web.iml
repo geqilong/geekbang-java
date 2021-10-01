@@ -38,6 +38,10 @@
     <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/servlet-web" />
   </component>
   <component name="WebModuleProperties">
+    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+    <webroots>
+      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
+    </webroots>
     <containerElement type="library" level="module">
       <attribute name="method" value="0" />
       <attribute name="URI" value="/WEB-INF/lib/junit-4.13.jar" />
@@ -144,9 +148,5 @@
       <attribute name="URI" value="/WEB-INF/lib/jackson-annotations-2.9.5.jar" />
       <url>jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.9.5/jackson-annotations-2.9.5.jar!/</url>
     </containerElement>
-    <deploymentDescriptor version="2.3" name="web.xml" optional="false" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
-    <webroots>
-      <root relative="/" url="file://$MODULE_DIR$/src/main/webapp" />
-    </webroots>
   </component>
 </module>
